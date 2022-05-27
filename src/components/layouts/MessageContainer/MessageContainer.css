@@ -1,0 +1,8 @@
+.MessageCointaner {
+    width: 100%;
+
+}
+
+.MessageCointaner:hover {
+    background-color: antiquewhite;
+}

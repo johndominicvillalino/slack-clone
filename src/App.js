@@ -1,10 +1,11 @@
 
 import './App.css';
+import MessageDirect from './components/MessageDirect/MessageDirect';
 
 function App() {
   return (
     < >
-    App
+    <MessageDirect></MessageDirect>
     </>
   );
 }
