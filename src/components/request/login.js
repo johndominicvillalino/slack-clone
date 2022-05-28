@@ -1,3 +1,4 @@
+
 export const login = () => {
 
     let data = {
@@ -15,9 +16,10 @@ export const login = () => {
 
       };
       
-      fetch("http://206.189.91.54//api/v1/auth/sign_in", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
+      const test = fetch("http://206.189.91.54//api/v1/auth/sign_in", requestOptions)
+      .then(response => response)
       .catch(error => console.log('error', error));
+
+      return test
 
 }

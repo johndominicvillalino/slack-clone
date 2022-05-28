@@ -1,18 +1,23 @@
 import React, { useEffect } from 'react'
 import MessageCointaer from '../layouts/MessageContainer/MessageCointaer'
-import { login } from '../request/login'
+import { sendMessage } from '../request/sendMessage'
 
 const MessageDirect = () => {
 
-  useEffect(() => {
-    const test = login()
-    console.log(test) 
-  })
 
+  const handleSubmit = async e => {
+    
+    e.preventDefault()
+    const test = await sendMessage()
+
+
+  } 
 
   return ( 
     <>
-    <MessageCointaer>MessageDirect</MessageCointaer>
+    <MessageCointaer><button onClick={handleSubmit}>
+      submit
+      </button></MessageCointaer>
     </>
   )
 }
