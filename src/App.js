@@ -1,16 +1,16 @@
 import "./App.css";
 import MessageDirect from "./components/MessageDirect/MessageDirect";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Router>
-        <Switch>
+        <Routes>
           <Route path="/message" component={MessageDirect} />
           {/* <Route path="/login" component={Login} />
           <Route path="/register" component={Register} /> */}
-        </Switch>
+        </Routes>
       </Router>
     </>
   );
