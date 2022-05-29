@@ -3,7 +3,7 @@ import { login } from './login'
 
 // desc : send a direct message user 
 
-export const sendMessage = async () => {
+const sendMessage = async () => {
 
     try {
 
@@ -17,7 +17,7 @@ export const sendMessage = async () => {
         const uid = head.headers.get('uid')
 
         let data = {
-                    receiver_id:2066,
+                    receiver_id:2077,
                     receiver_class: "User",
                     body:"test message 3"
                 }
@@ -53,3 +53,5 @@ export const sendMessage = async () => {
     }
 
 }
+
+export default sendMessage
