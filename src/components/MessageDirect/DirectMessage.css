@@ -1,0 +1,17 @@
+.messagesContainer {
+    display:flex;
+    flex-direction: column;
+    height: 80vh;
+    width: 90vw;
+    border: 1px solid black;
+    padding-bottom: 20px;
+  
+}
+
+.messageToName {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 25px;
+    border-bottom: 1px solid #b8b5b5;
+}

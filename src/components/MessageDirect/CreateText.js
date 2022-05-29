@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
-import {ReactComponent as SendLogo} from './send.svg'
-import './MessageDirect.css'
+import {ReactComponent as SendLogo} from './images/send.svg'
+import './CreateText.css'
 
 
 
-const MessageDirect = () => {
+const CreateText = () => {
   const inputRef = useRef();
 
   const [textScrollHeight, setTextScrollHeight] = useState("auto");
   const [message,setMessage] = useState('')
   const [sendClass, setSendClass] = useState('disable')
   const [sendClassSpan, setSendClassSpan] = useState('sendMessageBtnDisable')
-
 
 
 
@@ -56,7 +55,7 @@ const MessageDirect = () => {
 
   return (
     <>
-      <div className="messageDirectContainer">
+      <div className='messageDirectContainer' >
         <div className="topOptions">
         </div>
         <form>
@@ -81,4 +80,4 @@ const MessageDirect = () => {
   );
 };
 
-export default MessageDirect;
+export default CreateText;
