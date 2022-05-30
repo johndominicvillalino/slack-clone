@@ -37,14 +37,15 @@ const sendMessage = async (userInfo) => {
         }
 
         const res = await fetch("http://206.189.91.54//api/v1/messages", requestOptions)
+        const result = await res.text()
 
-        if (res) {
-            console.log(await res.text())
+        if(result) {
+            return result
         }
-
+        
     } catch (err) {
-
         console.error(err.message)
+        return err.message
 
     }
 }
