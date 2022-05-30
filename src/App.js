@@ -1,13 +1,14 @@
-
-import './App.css';
-import MessageDirect from './components/MessageDirect/MessageDirect';
+import './App.css'
+import CreateChannel from './components/Create-new-channel/CreateChannel'
+import MessageDirect from './components/MessageDirect/MessageDirect'
 
 function App() {
   return (
-    < >
-    <MessageDirect></MessageDirect>
+    <>
+      <CreateChannel />
+      {/* <MessageDirect></MessageDirect> */}
     </>
-  );
+  )
 }
 
-export default App;
+export default App
