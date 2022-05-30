@@ -1,14 +1,17 @@
+// desc = create a channel
+// Parameter : pass object data with properties - { accessToken, client, expiry, uid, channelName, user_ids }
+
 const createChannelMembers = async (userInfo) => {
   try {
     if (typeof userInfo !== 'object') {
       return 'Please pass an object!'
     }
 
-    const { accessToken, client, expiry, uid, name, user_ids } = userInfo
+    const { accessToken, client, expiry, uid, channelName, user_ids } = userInfo
 
     let data = {
-      name: name,
-      user_ids: user_ids,
+      name: channelName,
+      user_ids: [user_ids],
     }
 
     data = JSON.stringify(data)
@@ -31,8 +34,10 @@ const createChannelMembers = async (userInfo) => {
       requestOptions
     )
 
-    if (res) {
-      console.log(await res.json())
+    const result = await res.json()
+
+    if (result) {
+      return result
     }
   } catch (err) {
     console.error(err.message)
