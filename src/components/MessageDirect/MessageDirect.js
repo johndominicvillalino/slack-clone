@@ -16,3 +16,4 @@ const MessageDirect = ({login}) => {
 
 
 export default connect(null, {login})(MessageDirect);
+
