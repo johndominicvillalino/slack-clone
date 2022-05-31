@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import './App.css'
-import Channels from './components/Create-new-channel/Channels'
+import Channels from './components/Channels/Channels'
 
 function App() {
   return (
