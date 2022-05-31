@@ -13,11 +13,11 @@ export const login = () => {
             'Content-Type': 'Application/json'
         }
 
-      };
-      
-      fetch("http://206.189.91.54//api/v1/auth/sign_in", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+    };
+
+    fetch("http://206.189.91.54//api/v1/auth/sign_in", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error))
 
 }
