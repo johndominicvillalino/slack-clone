@@ -1,24 +1,43 @@
-export const login = () => {
+// desc = login
+// Parameter : pass object data with properties - { email, password }
 
-    let data = {
-        email: "user333333332@example.com",
-        password: "12345678"
+const login = async (userInfo) => {
+  try {
+    if (typeof userInfo !== 'object') {
+      return 'Please pass an object!'
     }
 
+    const { email, password } = userInfo
+
+    let data = {
+      email: email,
+      password: password,
+    }
+
+    data = JSON.stringify(data)
+
     let requestOptions = {
-        method: 'POST',
-        body: JSON.stringify(data),
-        redirect: 'follow',
-        headers: {
-            'Content-Type': 'Application/json'
-        }
+      method: 'POST',
+      body: data,
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+    }
 
-    };
+    const res = await fetch(
+      'http://206.189.91.54//api/v1/auth/sign_in',
+      requestOptions
+    )
 
-    fetch("http://206.189.91.54//api/v1/auth/sign_in", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error))
+    const result = await res.json()
 
+    if (result) {
+      return result
+    }
+  } catch (err) {
+    console.error(err.message)
+  }
 }
 
+export default login
