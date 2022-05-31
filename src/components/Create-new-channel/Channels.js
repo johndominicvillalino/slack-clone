@@ -9,9 +9,9 @@ const CreateChannel = () => {
   useEffect(() => {
     const channels = async () => {
       const data = {
-        accessToken: 'jqe4HDl_soQzX0BVWtxzOw',
-        client: 'm6xdTmmZzcJDynwBoSqv_w',
-        expiry: '1655197697',
+        accessToken: 'ELJAM_VwcxNmaGDwLSa6Lw',
+        client: 'OrXtsZr8DaXTFP5URe1gMg',
+        expiry: '1655204656',
         uid: 'user@example.com',
       }
 
