@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import './App.css'
-import CreateChannel from './components/Create-new-channel/CreateChannel'
-import MessageDirect from './components/MessageDirect/MessageDirect'
-
-function App() {
-  return (
-    <>
-      App
-    </>
-  )
-}
-
-export default App
-=======
 import "./App.css";
 import MessageDirect from "./components/MessageDirect/MessageDirect";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -46,4 +31,3 @@ const AppBody = styled.div`
   display: flex;
   height: 100vh;
 `;
->>>>>>> fa2ec61b50798d7a04b5e55e97d6217aa299bc4f
