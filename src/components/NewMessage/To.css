@@ -1,0 +1,7 @@
+.search-sender {
+    border: 0;
+    width: 100%;
+}
+.search-sender:focus {
+    outline:none;
+}

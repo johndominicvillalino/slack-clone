@@ -1,5 +1,4 @@
 import "./App.css";
-import MessageDirect from "./components/MessageDirect/MessageDirect";
 import { Switch, Route } from "react-router-dom";
 import Header from "./components/layouts/Header/Header";
 import styled from "styled-components";
@@ -7,17 +6,20 @@ import SideBarNav from "./components/layouts/SideBarNav/SideBarNav";
 import NewMessage from "./components/NewMessage/NewMessage";
 
 function App() {
+
+
+
   return (
     <>
-      <Header />
+      <Header ></Header>
       <AppBody>
-      <SideBarNav />
+        <SideBarNav />
         <Switch>
           <Route path="/" exact>
             {/* Main Chat Here */}
             asdasdas
           </Route>
-          <Route path='/test' exact>
+          <Route path='/new-message' exact>
             <NewMessage></NewMessage>
           </Route>
         </Switch>
