@@ -5,8 +5,7 @@ import MessageDirect from './components/MessageDirect/MessageDirect'
 function App() {
   return (
     <>
-      <CreateChannel />
-      {/* <MessageDirect></MessageDirect> */}
+      App
     </>
   )
 }
