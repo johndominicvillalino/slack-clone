@@ -1,12 +1,11 @@
+import { useEffect } from 'react'
 import './App.css'
-import CreateChannel from './components/Create-new-channel/CreateChannel'
-import MessageDirect from './components/MessageDirect/MessageDirect'
+import Channels from './components/Create-new-channel/Channels'
 
 function App() {
   return (
     <>
-      <CreateChannel />
-      {/* <MessageDirect></MessageDirect> */}
+      <Channels />
     </>
   )
 }

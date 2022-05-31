@@ -1,0 +1,29 @@
+li {
+  list-style: none;
+  font-weight: normal;
+}
+
+ul {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.addChannels > p {
+  font-weight: bold;
+}
+
+.channelOptions {
+  background: grey;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.channels {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.channelMessageContainer {
+  background-color: aquamarine;
+}
