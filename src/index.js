@@ -7,6 +7,6 @@ import CreateChannel from './components/Create-new-channel/CreateChannel'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <CreateChannel />
+    <App />
   </React.StrictMode>
 )
