@@ -1,19 +1,19 @@
-// import React, { useEffect } from 'react'
-// import MessageCointaer from '../layouts/MessageContainer/MessageCointaer'
-// import { login } from '../request/login'
+import React, { useEffect } from 'react'
+import MessageCointaer from '../layouts/MessageContainer/MessageCointaer'
+import login from '../request/login'
+import { connect } from 'react-redux'
 
-// const MessageDirect = () => {
+const MessageDirect = ({login}) => {
 
-//   useEffect(() => {
-//     const test = login()
-//     console.log(test)
-//   })
+ 
+  return ( 
+    <>
+    <MessageCointaer>MessageDirect</MessageCointaer>
+    </>
+  )
+}
 
-//   return (
-//     <>
-//     <MessageCointaer>MessageDirect</MessageCointaer>
-//     </>
-//   )
-// }
 
-// export default MessageDirect
+
+export default connect(null, {login})(MessageDirect);
+
