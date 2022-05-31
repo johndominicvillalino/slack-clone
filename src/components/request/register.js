@@ -1,24 +1,44 @@
-const register = (email, password, password_confirmation) => {
+// desc = register
+// Parameter : pass object data with properties - { email, password, password_confirmation }
+
+const register = async (userInfo) => {
+  try {
+    if (typeof userInfo !== 'object') {
+      return 'Please pass an object!'
+    }
+
+    const { email, password, password_confirmation } = userInfo
 
     let data = {
-        email: email,
-        password: password,
-        password_confirmation: password_confirmation,
-    };
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+    }
 
-    var requestOptions = {
-        method: 'POST',
-        body: JSON.stringify(data),
-        redirect: 'follow', 
-        headers: {
-            'Content-Type': 'Application/json'
-        }
-    };
+    data = JSON.stringify(data)
 
-    fetch("http://206.189.91.54//api/v1/auth/", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error))
+    let requestOptions = {
+      method: 'POST',
+      body: data,
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+    }
+
+    const res = await fetch(
+      'http://206.189.91.54//api/v1/auth/',
+      requestOptions
+    )
+
+    const result = await res.json()
+
+    if (result) {
+      return result
+    }
+  } catch (err) {
+    console.error(err.message)
+  }
 }
 
-export default register;
+export default register
