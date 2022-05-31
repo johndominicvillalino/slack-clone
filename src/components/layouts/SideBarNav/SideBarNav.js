@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CreateIcon from "@mui/icons-material/Create";
+import {Link} from 'react-router-dom'
 
 function SideBarNav() {
   return (
@@ -10,8 +11,7 @@ function SideBarNav() {
         <SideBarInfo>
           <h2>Avion School</h2>
         </SideBarInfo>
-        <KeyboardArrowDownIcon />
-        <CreateIcon />
+        <Link to='/test'  style={{backgroundColor:'#fff',padding:'5px',borderRadius:'50%'}}><CreateIcon /></Link>
       </SideBarHeader>
     </SideBarContainer>
   );
@@ -24,7 +24,8 @@ const SideBarContainer = styled.div`
   color: white;
   flex: 0.3;
   border-top: 1px solid #49274b;
-  max-width: 260px;
+  min-width: 300px;
+  max-width:300px;
   margin-top: 60px;
 `;
 
