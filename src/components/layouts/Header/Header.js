@@ -10,7 +10,7 @@ const Header = () => {
     <HeaderContainer>
       {/* Header Left */}
       <HeaderLeft>
-        <AccessTimeIcon />
+      
       </HeaderLeft>
 
       {/* Header Search */}
@@ -21,7 +21,7 @@ const Header = () => {
 
       {/* Header Right */}
       <HeaderRight>
-        <HelpOutlineIcon />
+   
       </HeaderRight>
       <HeaderAvatar
       // Add onClick
