@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { Avatar } from '@mui/material'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
@@ -12,36 +13,33 @@ import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import login from '../../request/login'
 
-const Header = () => {
+const Header = ({ user }) => {
   // {/* AVATAR */}
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const [active, setActive] = useState(true)
   const [userDetails, setUserDetails] = useState({
     email: '',
     image: '',
     id: '',
     uid: '',
   })
+
+  useEffect(() => {
+    if (Object.keys(user).length < 1) {
+      return
+    }
+
+    const { id, email, image, uid } = user.data
+    setUserDetails(() => ({
+      email: email,
+      image: image,
+      id: id,
+      uid: uid,
+    }))
+  }, [user])
+
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
-
-    const fetch = async () => {
-      const fetched = await login({
-        email: 'user@example.com',
-        password: '12345678',
-      })
-      const { id, email, uid, image } = fetched.data
-      setActive(false)
-      return setUserDetails(() => ({
-        email: email,
-        id: id,
-        uid: uid,
-        image: image,
-      }))
-    }
-
-    active && fetch()
   }
   const handleClose = () => {
     setAnchorEl(null)
@@ -140,7 +138,11 @@ const Header = () => {
   )
 }
 
-export default Header
+// export default Header
+const MapToStateProps = (state) => ({
+  user: state.user,
+})
+export default connect(MapToStateProps)(Header)
 
 const HeaderSearch = styled.div`
   flex: 0.4;
