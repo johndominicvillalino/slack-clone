@@ -1,0 +1,7 @@
+.new-message-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    margin-top: 80px;
+    flex-direction: column;
+}

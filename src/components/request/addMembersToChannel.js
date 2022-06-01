@@ -1,18 +1,17 @@
-// desc = register
-// Parameter : pass object data with properties - { email, password, password_confirmation }
+// desc = add members to the channel
+// Parameter : pass object data with properties - { accessToken, client, expiry, uid, id, member_id }
 
-const register = async (userInfo) => {
+const addMembersToChannel = async (userInfo) => {
   try {
     if (typeof userInfo !== 'object') {
       return 'Please pass an object!'
     }
 
-    const { email, password, password_confirmation } = userInfo
+    const { accessToken, client, expiry, uid, id, member_id } = userInfo
 
     let data = {
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation,
+      id: id,
+      member_id: member_id,
     }
 
     data = JSON.stringify(data)
@@ -22,12 +21,16 @@ const register = async (userInfo) => {
       body: data,
       redirect: 'follow',
       headers: {
+        'access-token': accessToken,
+        client: client,
+        expiry: expiry,
+        uid: uid,
         'Content-Type': 'Application/json',
       },
     }
 
     const res = await fetch(
-      'http://206.189.91.54//api/v1/auth/',
+      'http://206.189.91.54//api/v1/channel/add_member',
       requestOptions
     )
 
@@ -41,4 +44,4 @@ const register = async (userInfo) => {
   }
 }
 
-export default register
+export default addMembersToChannel

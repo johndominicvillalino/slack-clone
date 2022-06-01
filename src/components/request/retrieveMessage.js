@@ -1,24 +1,24 @@
-// desc : send a direct message user
-// Parameter : pass object data with properties - { accessToken, client, expiry, uid, message, receiver_id }
-const sendMessage = async (userInfo) => {
+// desc : receive message from the user
+// Parameter : pass object data with properties - { accessToken, client, expiry, uid, sender_id, receiver_class, reciever_id }
+
+const retrieveMessage = async (userInfo) => {
   try {
     if (typeof userInfo !== 'object') {
       return 'Please pass an object!'
     }
 
-    const { accessToken, client, expiry, uid, message, receiver_id } = userInfo
-
-    let data = {
+    const {
+      accessToken,
+      client,
+      expiry,
+      uid,
+      sender_id,
+      receiver_class,
       receiver_id,
-      receiver_class: 'User',
-      body: message,
-    }
-
-    data = JSON.stringify(data)
+    } = userInfo
 
     let requestOptions = {
-      method: 'POST',
-      body: data,
+      method: 'GET',
       redirect: 'follow',
       headers: {
         'access-token': accessToken,
@@ -30,7 +30,7 @@ const sendMessage = async (userInfo) => {
     }
 
     const res = await fetch(
-      'http://206.189.91.54//api/v1/messages',
+      `http://206.189.91.54//api/v1/messages?receiver_class=${receiver_class}&receiver_id=${receiver_id}$sender_id=${sender_id}`,
       requestOptions
     )
     const result = await res.json()
@@ -44,4 +44,4 @@ const sendMessage = async (userInfo) => {
   }
 }
 
-export default sendMessage
+export default retrieveMessage

@@ -1,15 +1,25 @@
 import React, { useEffect } from 'react'
 import MessageCointaer from '../layouts/MessageContainer/MessageCointaer'
-import { login } from '../request/login'
+import login from '../request/login'
+import { connect } from 'react-redux'
 
-const MessageDirect = () => {
+const MessageDirect = ({login}) => {
 
   useEffect(() => {
-    const test = login()
-    console.log(test) 
-  })
 
+    async function test () {
+  
+      await login({
+        email:'usaaa2@example.com',
+        password: '12345678'
+      })
+    }
 
+    test()
+
+  },[])
+
+ 
   return ( 
     <>
     <MessageCointaer>MessageDirect</MessageCointaer>
@@ -18,5 +28,4 @@ const MessageDirect = () => {
 }
 
 
-
-export default MessageDirect
+export default connect(null, {login})(MessageDirect);
