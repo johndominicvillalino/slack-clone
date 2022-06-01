@@ -1,7 +1,7 @@
 // desc = register
 // Parameter : pass object data with properties - { email, password, password_confirmation }
 
-const register = async (userInfo) => {
+const register = (userInfo) => async dispatch => {
   try {
     if (typeof userInfo !== 'object') {
       return 'Please pass an object!'
@@ -26,14 +26,23 @@ const register = async (userInfo) => {
       },
     }
 
+    
+
     const res = await fetch(
       'http://206.189.91.54//api/v1/auth/',
       requestOptions
     )
 
+    const headers = {
+      accessToken : res.headers.get('access-token'),
+      expiry: res.headers.get('expiry'),
+      uid: res.headers.get('uid'),
+      client: res.headers.get('client')
+    }
     const result = await res.json()
 
     if (result) {
+      result.headers = headers;
       return result
     }
   } catch (err) {

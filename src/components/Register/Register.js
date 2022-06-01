@@ -1,9 +1,54 @@
-import register from '../request/register';
-import { useState } from 'react'
+import registerFunc from '../request/register';
+import { useState,useEffect } from 'react'
 import "./Register.css"
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import autoLoginFunc from '../actions/autoLogin';
+import { useHistory } from 'react-router-dom';
+import listofUsers from '../request/listofUsers';
 
-const Register = () => {
+const Register = ({ registerFunc, autoLoginFunc }) => {
+
+  let history = useHistory()
+
+
+
+  useEffect(() => {
+
+    let checkUser = window.localStorage.getItem('currentUser')
+    checkUser = JSON.parse(checkUser)
+
+    if (!checkUser) {
+      return
+    }
+    const autoLogin = async () => {
+
+      try {
+
+        const userInfo = {
+          accessToken: checkUser.headers.accessToken,
+          client: checkUser.headers.client,
+          expiry: checkUser.headers.expiry,
+          uid: checkUser.headers.uid,
+        }
+
+        const allUsers = await listofUsers(userInfo)
+  
+          if (!allUsers.errors) {
+        
+           const test = await autoLoginFunc(checkUser)  
+            history.push(`/${checkUser.data.id}/client`)
+    
+          }
+        
+      } catch (err) {
+        console.error(err.message)
+      }
+
+    }
+    autoLogin()
+  }, [])
+
   const [isRegister, setIsRegister] = useState(false);
   const [registerDetails, setRegisterDetails] = useState({
     email: "",
@@ -23,10 +68,28 @@ const Register = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const registerNow = await register(registerDetails)
-    const user = JSON.stringify(registerNow)
-    localStorage.setItem("currentUser", user)
-    alert("Successfully registered!");
+
+    try {
+
+
+      const registerNow = await registerFunc(registerDetails)
+ 
+      if (!registerNow.errors) {
+
+        const user = JSON.stringify(registerNow)
+        localStorage.setItem("currentUser", user)
+        console.log(registerNow)
+        await autoLoginFunc(registerNow)
+  
+        history.push(`/${registerNow.data.id}/client`)
+
+      }
+
+    } catch (error) {
+
+    }
+
+
   }
 
   return (
@@ -81,4 +144,5 @@ const Register = () => {
   )
 }
 
-export default Register;
+
+export default connect(null, { registerFunc, autoLoginFunc })(Register);
