@@ -1,5 +1,6 @@
 import login from '../request/login';
 import {useState} from 'react'
+import "./Login.css";
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -35,29 +36,41 @@ const Login = () => {
        </>
     ): (
       <>
+      <img src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg" alt="slack logo" height="42" /> <br /> <br /> 
+      <div className="sign-in-heading">Sign in to Slack</div> <br />
+      <div className="sign-in-sub-heading">
+      We suggest using the <strong>email address you use at work.</strong>
+      </div> <br />
+      <div className="header-sidelink-container">
+      <div className="header-sidelink">Already have Slack?</div>
+      <div className = "header-sidelink-link">Sign in to your account</div>
+      </div>
       <form>
-        <label htmlFor="email">Email:</label> <br /> 
      <input
             name="email"
-              type="text"
+              type="email"
               value={loginDetails.email}
               onChange={handleChange}
-            /> <br />
+              placeholder ="name@work-email.com"
+              className='email-input'
+            /> <br /> <br />
 
-            <label htmlFor="password">Password:</label> <br />
             <input
             name="password"
               type="password"
               value={loginDetails.password}
               onChange={handleChange}
-            />
+              className="password-input"
+              placeholder='Slackpassword123'
+            /> <br /> <br />
+            
             <button 
             type='submit'
-            onClick={handleSubmit}>Submit</button>
+            onClick={handleSubmit}
+            className="login-submit">Sign In with Email</button>
       </form>
       </>
     )}
-    
     </>
   )
 }

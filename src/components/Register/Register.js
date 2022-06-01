@@ -1,6 +1,6 @@
 import register from '../request/register';
 import {useState} from 'react'
-
+import "./Register.css"
 
 const Register = () => {
     const [isRegister, setIsRegister] = useState(false); 
@@ -10,7 +10,6 @@ const Register = () => {
         password_confirmation:"",
     })
     
-
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -44,33 +43,47 @@ const Register = () => {
            </>
         ): (
           <>
+      <img src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg" alt="slack logo" height="42" /> <br /> <br /> 
+      <div className="sign-in-heading">First, enter your email</div> <br />
+      <div className="sign-in-sub-heading">
+      We suggest using the <strong>email address you use at work.</strong>
+      </div> <br /> 
+      <div className="header-sidelink-container">
+      <div className="header-sidelink">New to Slack?</div>
+      <div className = "header-sidelink-link">Create an account</div>
+      </div>
           <form>
-            <label htmlFor="email">Email:</label> <br /> 
          <input
                 name="email"
                   type="text"
                   value={registerDetails.email}
                   onChange={handleChange}
-                /> <br />
+                  placeholder ="name@work-email.com"
+                  className ="email-input"
+                /> <br /> <br />
     
-                <label htmlFor="password">Password:</label> <br />
                 <input
                 name="password"
                   type="password"
                   value={registerDetails.password}
                   onChange={handleChange}
-                /> <br />
+                  className="password-input"
+                  placeholder='Slackpassword123'
+                /> <br /> <br />
 
-                <label htmlFor="password_confirmation">Confirm Password:</label> <br />
                 <input
                 name="password_confirmation"
                   type="password"
                   value={registerDetails.password_confirmation}
                   onChange={handleChange}
-                />
+                  className="password_confirmation-input"
+                  placeholder='Slackpassword123'
+                /> <br /> <br />
+
                 <button 
                 type='submit'
-                onClick={handleSubmit}>Submit</button>
+                onClick={handleSubmit}
+                className="register-submit">Sign up</button>
           </form>
           </>
         )}
