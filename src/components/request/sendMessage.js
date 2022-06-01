@@ -1,6 +1,5 @@
 // desc : send a direct message user
 // Parameter : pass object data with properties - { accessToken, client, expiry, uid, message, receiver_id }
-
 const sendMessage = async (userInfo) => {
   try {
     if (typeof userInfo !== 'object') {

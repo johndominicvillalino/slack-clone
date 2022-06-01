@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
 import './App.css'
-// import CreateChannel from './components/Create-new-channel/CreateChannel'
-import MessageDirect from './components/MessageDirect/MessageDirect'
-import retrieveMessage from './components/request/retrieveMessage'
+import { Switch, Route } from 'react-router-dom'
+import Header from './components/layouts/Header/Header'
+import styled from 'styled-components'
+import SideBarNav from './components/layouts/SideBarNav/SideBarNav'
+import NewMessage from './components/NewMessage/NewMessage'
 
 function App() {
   // useEffect(() => {
@@ -26,10 +27,26 @@ function App() {
 
   return (
     <>
-      {/* <CreateChannel /> */}
-      {/* <MessageDirect></MessageDirect> */}
+      <Header />
+      <AppBody>
+        <SideBarNav />
+        <Switch>
+          <Route path="/" exact>
+            {/* Main Chat Here */}
+            asdasdas
+          </Route>
+          <Route path="/test" exact>
+            <NewMessage></NewMessage>
+          </Route>
+        </Switch>
+      </AppBody>
     </>
   )
 }
 
 export default App
+
+const AppBody = styled.div`
+  display: flex;
+  height: 100vh;
+`

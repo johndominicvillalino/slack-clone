@@ -1,17 +1,18 @@
-// desc = login
-// Parameter : pass object data with properties - { email, password }
+// desc = register
+// Parameter : pass object data with properties - { email, password, password_confirmation }
 
-const login = async (userInfo) => {
+const register = async (userInfo) => {
   try {
     if (typeof userInfo !== 'object') {
       return 'Please pass an object!'
     }
 
-    const { email, password } = userInfo
+    const { email, password, password_confirmation } = userInfo
 
     let data = {
       email: email,
       password: password,
+      password_confirmation: password_confirmation,
     }
 
     data = JSON.stringify(data)
@@ -26,7 +27,7 @@ const login = async (userInfo) => {
     }
 
     const res = await fetch(
-      'http://206.189.91.54//api/v1/auth/sign_in',
+      'http://206.189.91.54//api/v1/auth/',
       requestOptions
     )
 
@@ -40,4 +41,4 @@ const login = async (userInfo) => {
   }
 }
 
-export default login
+export default register
