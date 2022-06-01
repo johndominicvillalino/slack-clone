@@ -1,44 +1,29 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import './To.css'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
-const To = ({userInfo}) => {
+
+const To = ({setReceiver}) => {
 
     const [senderInput,setSenderInput] = useState('')
-    const [loginData,setLoginData] = useState('')
-    
-
-    useEffect(() => {
-        setLoginData(userInfo)
-    },[userInfo])
 
     const handleChange = e => {
         setSenderInput(e.target.value)
-        console.log(loginData.action)
+        setReceiver(e.target.value)
 
     }
     
     return (
-        <>
+
             <div style={containerStyle}>
                 <h3>To</h3>
-                <input onChange={handleChange} value={senderInput} placeholder='#Channel Name, @id or somebody@example.com' className='search-sender' type="text" />
+                <input onChange={handleChange} value={senderInput} placeholder='#ChannelId or @id' className='search-sender' type="text" />
             </div>
-        </>
+       
     )
 }
 
-To.propTypes = {
-    userInfo : PropTypes.object.isRequired
-}
 
-const mapStateToProps = state => ({
-    userInfo: state.user
-})
-  
-
-export default connect(mapStateToProps)(To)
+export default To
 
 const containerStyle = {
     borderBottom:'1px solid #cecccc',

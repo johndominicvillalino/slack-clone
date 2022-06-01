@@ -1,33 +1,16 @@
-import React, { useEffect } from 'react'
+import React, {useState } from 'react'
 import './NewMessage.css'
 import loginFunc from '../request/login'
-import retrieveMessageFunc from '../request/retrieveMessage'
 import To from './To'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Messages from './Messages'
 
-const NewMessage = ({loginFunc}) => {
+const NewMessage = () => {
 
+    const [receiver,setReceiver] = useState('')
 
-    useEffect(() => {
-
-        const loginNow = async () => {
-
-            try {
-                const loginRes = await loginFunc({
-                    email: 'usaaa2@example.com',
-                    password: 12345678
-                })
-                if (loginRes) {
-                    // console.log(loginRes)
-                }
-            } catch (err) {
-                console.error(err.message)
-            }
-
-        }
-        loginNow()
-    }, [])
+     
 
     return (
         <>
@@ -35,7 +18,8 @@ const NewMessage = ({loginFunc}) => {
                 <div style={{borderBottom:'1px solid #cecccc',padding:'9px'}}>
                     <h2>New Message</h2>
                 </div>
-                <To></To>
+                <To setReceiver={setReceiver}></To>
+                <Messages receiver={receiver}></Messages>
             </div>
         </>
     )
