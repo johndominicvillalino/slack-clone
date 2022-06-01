@@ -30,7 +30,7 @@ const Register = () => {
         // user.push(dateCreated);
         // user.push(email);
         // user.push(id);
-        const user = JSON.stringify(registerNow);
+        const user = JSON.stringify(registerNow)
         localStorage.setItem("currentUser", user)
         alert("Successfully registered!");
         }

@@ -23,7 +23,7 @@ const Login = () => {
         e.preventDefault();
         const loginNow = await login(loginDetails)
         if(loginNow) {
-            const user = JSON.stringify(loginNow);
+            const user = JSON.stringify(loginNow)
             localStorage.setItem("currentUser", user);
             alert("Successfully logged in!")
         }
