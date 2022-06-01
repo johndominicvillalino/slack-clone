@@ -1,12 +1,12 @@
-import React from 'react'
-import AddNewChannel from './AddNewChannel/AddNewChannel'
+// import React from 'react'
+// import AddNewChannel from './AddNewChannel/AddNewChannel'
 
-const CreateChannel = () => {
-  return (
-    <>
-      <AddNewChannel />
-    </>
-  )
-}
+// const CreateChannel = () => {
+//   return (
+//     <>
+//       <AddNewChannel />
+//     </>
+//   )
+// }
 
-export default CreateChannel
+// export default CreateChannel
