@@ -1,30 +1,56 @@
-li {
+.channels ul {
   list-style: none;
-  font-weight: normal;
 }
 
-ul {
+.channelContainer {
+  padding: 10px 0px 0px 20px;
+}
+
+.channelList {
   margin: 10px 0;
-  font-weight: bold;
 }
 
-.addChannels > p {
-  font-weight: bold;
+.channelList li {
+  cursor: pointer;
+}
+
+.addChannel {
+  border: none;
+  color: #fff;
+  background-color: transparent;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 
 .channelOptions {
-  background: grey;
   display: flex;
   flex-direction: column;
+  width: 200px;
+  position: absolute;
+  left: 50px;
+  padding: 10px;
+  background-color: black;
+}
+
+.channelOptions button {
+  cursor: pointer;
+}
+
+.createChannel {
   padding: 20px;
+  background-color: grey;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.channels {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
+.createChannel input {
+  margin: 5px 0;
 }
 
-.channelMessageContainer {
-  background-color: aquamarine;
+.createChannel button {
+  cursor: pointer;
 }
