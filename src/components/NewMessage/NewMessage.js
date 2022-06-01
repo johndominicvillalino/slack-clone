@@ -5,6 +5,7 @@ import To from './To'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Messages from './Messages'
+import Sendmessage from '../SendMessage/Sendmessage'
 
 const NewMessage = () => {
 
@@ -20,6 +21,7 @@ const NewMessage = () => {
                 </div>
                 <To setReceiver={setReceiver}></To>
                 <Messages receiver={receiver}></Messages>
+                <Sendmessage receiver={receiver} ></Sendmessage>
             </div>
         </>
     )
