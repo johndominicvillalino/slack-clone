@@ -3,21 +3,29 @@ import styled from "styled-components";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CreateIcon from "@mui/icons-material/Create";
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-function SideBarNav() {
+function SideBarNav({user}) {
+
+
+
   return (
     <SideBarContainer>
       <SideBarHeader>
         <SideBarInfo>
           <h2>Avion School</h2>
         </SideBarInfo>
-        <Link to='/new-message'  style={{backgroundColor:'#fff',padding:'5px',borderRadius:'50%'}}><CreateIcon /></Link>
+        <Link to={`/${user.data.id}/new-message/`}  style={{backgroundColor:'#fff',padding:'5px',borderRadius:'50%'}}><CreateIcon /></Link>
       </SideBarHeader>
     </SideBarContainer>
   );
 }
 
-export default SideBarNav;
+const MapToStateProp = state => ({
+  user:state.user
+})
+
+export default connect(MapToStateProp)(SideBarNav);
 
 const SideBarContainer = styled.div`
   background-color: var(--slack-color);
