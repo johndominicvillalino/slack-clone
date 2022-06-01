@@ -1,33 +1,38 @@
-import './App.css'
-import { Switch, Route } from 'react-router-dom'
-import Header from './components/layouts/Header/Header'
-import styled from 'styled-components'
-import SideBarNav from './components/layouts/SideBarNav/SideBarNav'
-import NewMessage from './components/NewMessage/NewMessage'
+import "./App.css";
+import { Switch, Route } from "react-router-dom";
+import Header from "./components/layouts/Header/Header";
+import styled from "styled-components";
+import SideBarNav from "./components/layouts/SideBarNav/SideBarNav";
+import NewMessage from "./components/NewMessage/NewMessage";
+import {useEffect} from 'react'
+import {connect} from 'react-redux'
+import loginFunc from './components/request/login'
 
-function App() {
-  // useEffect(() => {
-  //   const test = async () => {
-  //     const userInfo = {
-  //       accessToken: 'XdA6FGRl6TjQcoRjCffznw',
-  //       client: '-z3vCyLz4TRfYIFM6U3Xlg',
-  //       expiry: '1655127591',
-  //       uid: 'user@example.com',
-  //       sender_id: 1,
-  //       receiver_class: 'User',
-  //       receiver_id: 1,
-  //     }
+function App({loginFunc}) {
 
-  //     const data = await retrieveMessage(userInfo)
-  //     console.log(data)
-  //   }
+  useEffect(() => {
 
-  //   test()
-  // }, [])
+    const loginNow = async () => {
+
+        try {
+            await loginFunc({
+                email: 'usaaa2@example.com',
+                password: 12345678
+            })
+        } catch (err) {
+            console.error(err.message)
+        }
+
+    }
+    loginNow()
+    return () => {
+    }
+}, [loginFunc])
+
 
   return (
     <>
-      <Header />
+      <Header ></Header>
       <AppBody>
         <SideBarNav />
         <Switch>
@@ -35,18 +40,18 @@ function App() {
             {/* Main Chat Here */}
             asdasdas
           </Route>
-          <Route path="/test" exact>
+          <Route path='/new-message' exact>
             <NewMessage></NewMessage>
           </Route>
         </Switch>
       </AppBody>
     </>
-  )
+  );
 }
 
-export default App
+export default connect(null,{loginFunc})(App);
 
 const AppBody = styled.div`
   display: flex;
   height: 100vh;
-`
+`;

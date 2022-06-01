@@ -11,7 +11,7 @@ function SideBarNav() {
         <SideBarInfo>
           <h2>Avion School</h2>
         </SideBarInfo>
-        <Link to='/test'  style={{backgroundColor:'#fff',padding:'5px',borderRadius:'50%'}}><CreateIcon /></Link>
+        <Link to='/new-message'  style={{backgroundColor:'#fff',padding:'5px',borderRadius:'50%'}}><CreateIcon /></Link>
       </SideBarHeader>
     </SideBarContainer>
   );

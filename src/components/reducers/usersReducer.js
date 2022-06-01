@@ -1,11 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-const testReducer = createReducer([], (builder) => {
+const testReducer = createReducer({}, (builder) => {
     builder
-      .addCase('LOGIN', (state, action) => {
-        const test = action.payload
-         if(test) {
-             return test
+      .addCase('LOGIN', (state, payload) => {
+        const loginInfo = payload.action
+    
+         if(loginInfo) {
+
+            return loginInfo
          }
       })
   })

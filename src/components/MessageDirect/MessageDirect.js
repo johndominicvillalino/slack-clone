@@ -5,6 +5,20 @@ import { connect } from 'react-redux'
 
 const MessageDirect = ({login}) => {
 
+  useEffect(() => {
+
+    async function test () {
+  
+      await login({
+        email:'usaaa2@example.com',
+        password: '12345678'
+      })
+    }
+
+    test()
+
+  },[])
+
  
   return ( 
     <>
@@ -14,6 +28,4 @@ const MessageDirect = ({login}) => {
 }
 
 
-
 export default connect(null, {login})(MessageDirect);
-
