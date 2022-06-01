@@ -4,12 +4,16 @@ const testReducer = createReducer({}, (builder) => {
     builder
       .addCase('LOGIN', (state, payload) => {
         const loginInfo = payload.action
-    
          if(loginInfo) {
-
             return loginInfo
          }
       })
+      .addCase('LOAD_USER', (state, payload) => {
+         const loginInfo = payload.action
+          if(loginInfo) {
+             return loginInfo
+          }
+       })
   })
 
   export default testReducer;

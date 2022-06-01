@@ -1,94 +1,148 @@
-import register from '../request/register';
-import {useState} from 'react'
+import registerFunc from '../request/register';
+import { useState,useEffect } from 'react'
 import "./Register.css"
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import autoLoginFunc from '../actions/autoLogin';
+import { useHistory } from 'react-router-dom';
+import listofUsers from '../request/listofUsers';
 
-const Register = () => {
-    const [isRegister, setIsRegister] = useState(false); 
-    const [registerDetails, setRegisterDetails] =  useState({
-        email:"",
-        password:"",
-        password_confirmation:"",
-    })
-    
-    const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setRegisterDetails(prevData => {
-            return{
-                ...prevData,
-                [name]:value
-            }
-        })
+const Register = ({ registerFunc, autoLoginFunc }) => {
+
+  let history = useHistory()
+
+
+
+  useEffect(() => {
+
+    let checkUser = window.localStorage.getItem('currentUser')
+    checkUser = JSON.parse(checkUser)
+
+    if (!checkUser) {
+      return
     }
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const registerNow = await register(registerDetails)
-        // JSON.stringify(registerNow);
-        // const dateCreated = (registerNow.created_at);
-        // const email = (registerNow.email);
-        // const id = (registerNow.id);
-        // user.push(dateCreated);
-        // user.push(email);
-        // user.push(id);
+    const autoLogin = async () => {
+
+      try {
+
+        const userInfo = {
+          accessToken: checkUser.headers.accessToken,
+          client: checkUser.headers.client,
+          expiry: checkUser.headers.expiry,
+          uid: checkUser.headers.uid,
+        }
+
+        const allUsers = await listofUsers(userInfo)
+  
+          if (!allUsers.errors) {
+        
+           const test = await autoLoginFunc(checkUser)  
+            history.push(`/${checkUser.data.id}/client`)
+    
+          }
+        
+      } catch (err) {
+        console.error(err.message)
+      }
+
+    }
+    autoLogin()
+  }, [])
+
+  const [isRegister, setIsRegister] = useState(false);
+  const [registerDetails, setRegisterDetails] = useState({
+    email: "",
+    password: "",
+    password_confirmation: "",
+  })
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setRegisterDetails(prevData => {
+      return {
+        ...prevData,
+        [name]: value
+      }
+    })
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+
+
+      const registerNow = await registerFunc(registerDetails)
+ 
+      if (!registerNow.errors) {
+
         const user = JSON.stringify(registerNow)
         localStorage.setItem("currentUser", user)
-        alert("Successfully registered!");
-        }
-    
-    return (
-        < >
-        {isRegister ? (
-           <>
-           <h1>hello</h1>
-           </>
-        ): (
-          <>
-      <img src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg" alt="slack logo" height="42" /> <br /> <br /> 
-      <div className="sign-in-heading">First, enter your email</div> <br />
-      <div className="sign-in-sub-heading">
-      We suggest using the <strong>email address you use at work.</strong>
-      </div> <br /> 
-      <div className="header-sidelink-container">
-      <div className="header-sidelink">New to Slack?</div>
-      <div className = "header-sidelink-link">Create an account</div>
-      </div>
-          <form>
-         <input
-                name="email"
-                  type="text"
-                  value={registerDetails.email}
-                  onChange={handleChange}
-                  placeholder ="name@work-email.com"
-                  className ="email-input"
-                /> <br /> <br />
-    
-                <input
-                name="password"
-                  type="password"
-                  value={registerDetails.password}
-                  onChange={handleChange}
-                  className="password-input"
-                  placeholder='Slackpassword123'
-                /> <br /> <br />
+        console.log(registerNow)
+        await autoLoginFunc(registerNow)
+  
+        history.push(`/${registerNow.data.id}/client`)
 
-                <input
-                name="password_confirmation"
-                  type="password"
-                  value={registerDetails.password_confirmation}
-                  onChange={handleChange}
-                  className="password_confirmation-input"
-                  placeholder='Slackpassword123'
-                /> <br /> <br />
+      }
 
-                <button 
-                type='submit'
-                onClick={handleSubmit}
-                className="register-submit">Sign up</button>
-          </form>
-          </>
-        )}
-        </>
-      )
+    } catch (error) {
+
     }
-    
-    export default Register;
+
+
+  }
+
+  return (
+    <>
+      <div className='register-container' >
+
+        <img src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg" alt="slack logo" height="42" /> <br /> <br />
+        <div className="sign-in-heading">First, enter your email</div> <br />
+        <div className="sign-in-sub-heading">
+          We suggest using the <strong>email address you use at work.</strong>
+        </div> <br />
+        <div className="header-sidelink-container">
+          <div className="header-sidelink">Already has an account?</div>
+          <Link to='/' className="header-sidelink-link">Sign In</Link>
+        </div>
+        <form>
+          <input
+            name="email"
+            type="text"
+            value={registerDetails.email}
+            onChange={handleChange}
+            placeholder="name@work-email.com"
+            className="email-input"
+          /> <br /> <br />
+
+          <input
+            name="password"
+            type="password"
+            value={registerDetails.password}
+            onChange={handleChange}
+            className="password-input"
+            placeholder='Slackpassword123'
+          /> <br /> <br />
+
+          <input
+            name="password_confirmation"
+            type="password"
+            value={registerDetails.password_confirmation}
+            onChange={handleChange}
+            className="password_confirmation-input"
+            placeholder='Slackpassword123'
+          /> <br /> <br />
+
+          <button
+            type='submit'
+            onClick={handleSubmit}
+            className="register-submit">Sign up</button>
+        </form>
+      </div>
+    </>
+
+  )
+}
+
+
+export default connect(null, { registerFunc, autoLoginFunc })(Register);
