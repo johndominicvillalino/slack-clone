@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import styled from "styled-components";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CreateIcon from "@mui/icons-material/Create";
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-function SideBarNav({user}) {
 
+function SideBarNav({ user }) {
+
+
+  const [linkicon, setLinkIcon] = useState(false)
+
+  useEffect(() => {
+
+    if(Object.keys(user).length < 1) {
+      return
+    }
+
+    setLinkIcon(true)
+
+  },[user])
 
 
   return (
@@ -15,14 +28,14 @@ function SideBarNav({user}) {
         <SideBarInfo>
           <h2>Avion School</h2>
         </SideBarInfo>
-        <Link to={`/${user.data.id}/new-message/`}  style={{backgroundColor:'#fff',padding:'5px',borderRadius:'50%'}}><CreateIcon /></Link>
+        { linkicon && <Link to={`/${user.data.id}/new-message/`} style={{ backgroundColor: '#fff', padding: '5px', borderRadius: '50%' }}><CreateIcon /></Link>} 
       </SideBarHeader>
     </SideBarContainer>
   );
 }
 
 const MapToStateProp = state => ({
-  user:state.user
+  user: state.user
 })
 
 export default connect(MapToStateProp)(SideBarNav);

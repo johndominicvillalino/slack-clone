@@ -7,10 +7,32 @@ import NewMessage from "./components/NewMessage/NewMessage";
 import { useEffect } from 'react'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
+import {connect} from 'react-redux'
+import autoLogin from './components/actions/autoLogin'
+import { useHistory } from 'react-router-dom';
 
 
-function App() {
+function App({autoLogin}) {
 
+  let history = useHistory()
+
+  useEffect(() => {
+
+    let checkUser = window.localStorage.getItem('currentUser')
+    checkUser = JSON.parse(checkUser)
+
+    if (!checkUser) {
+      history.push('/')
+      return
+    }
+
+    const loginNow = async () => {
+      await autoLogin(checkUser)
+    }
+
+
+    loginNow()
+  },[])
 
   return (
     <>
@@ -41,16 +63,12 @@ function App() {
           </AppBody>
         </Route>
 
-
-
-
-
       </Switch>
     </>
   );
 }
 
-export default App;
+export default connect(null,{autoLogin})(App);
 
 const AppBody = styled.div`
   display: flex;

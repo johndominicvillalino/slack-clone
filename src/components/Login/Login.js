@@ -8,7 +8,6 @@ import listofUsers from '../request/listofUsers'
 import autoLoginFunc from "../actions/autoLogin";
 
 
-
 const Login = ({ login,autoLoginFunc }) => {
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const Login = ({ login,autoLoginFunc }) => {
     if (!checkUser) {
       return
     }
-
+    
     const autoLogin = async () => {
 
       try {
@@ -35,7 +34,7 @@ const Login = ({ login,autoLoginFunc }) => {
   
           if (!allUsers.errors) {
         
-           const test = await autoLoginFunc(checkUser)  
+           await autoLoginFunc(checkUser)  
             history.push(`/${checkUser.data.id}/client`)
     
           }
@@ -46,10 +45,7 @@ const Login = ({ login,autoLoginFunc }) => {
 
 
     }
-
     autoLogin()
-
-
   }, [])
 
   const [loginDetails, setLoginDetails] = useState({
