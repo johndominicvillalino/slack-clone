@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ChannelList from '../../Channels/ChannelList'
 import ChannelContainer from '../../Channels/ChannelContainer'
+import ChannelList from "../../Channels/ChannelList";
+import DMList from "../../DirectMessages/DMList";
+
 
 function SideBarNav({ user }) {
   const [linkicon, setLinkIcon] = useState(false)
@@ -40,6 +43,8 @@ function SideBarNav({ user }) {
       <ChannelContainer>
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
+      <ChannelList user={user}></ChannelList>
+    <DMList user={user}></DMList>
     </SideBarContainer>
   )
 }
