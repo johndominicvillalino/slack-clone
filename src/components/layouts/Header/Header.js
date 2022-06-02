@@ -12,8 +12,11 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import login from '../../request/login'
+import { useHistory } from 'react-router-dom'
 
 const Header = ({ user }) => {
+
+  let history = useHistory()
   // {/* AVATAR */}
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [userDetails, setUserDetails] = useState({
@@ -22,6 +25,11 @@ const Header = ({ user }) => {
     id: '',
     uid: '',
   })
+
+  const handleSignOut = e => {
+    window.localStorage.clear();
+    history.push('/')
+  }
 
   useEffect(() => {
     if (Object.keys(user).length < 1) {
@@ -130,7 +138,7 @@ const Header = ({ user }) => {
           <Divider />
           <MenuItem>Profile</MenuItem>
           <MenuItem>Preferences</MenuItem>
-          <MenuItem>Sign out</MenuItem>
+          <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
         </Menu>
       </React.Fragment>
       {/* AVATAR END */}

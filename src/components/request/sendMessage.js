@@ -6,11 +6,11 @@ const sendMessage = async (userInfo) => {
       return 'Please pass an object!'
     }
 
-    const { accessToken, client, expiry, uid, message, receiver_id } = userInfo
+    const { accessToken, client, expiry, uid, message, receiver_id, receiver_class} = userInfo
 
     let data = {
       receiver_id,
-      receiver_class: 'User',
+      receiver_class,
       body: message,
     }
 

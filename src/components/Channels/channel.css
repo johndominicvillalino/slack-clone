@@ -8,6 +8,8 @@
 
 .channelList {
   margin: 10px 0;
+  display:flex;
+  flex-direction: column;
 }
 
 .channelList li {
@@ -23,13 +25,7 @@
 }
 
 .channelOptions {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  position: absolute;
-  left: 50px;
-  padding: 10px;
-  background-color: black;
+cursor: pointer;
 }
 
 .channelOptions button {
