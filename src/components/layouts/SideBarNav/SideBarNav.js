@@ -5,6 +5,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ChannelList from "../../Channels/ChannelList";
+import DMList from "../../DirectMessages/DMList";
 
 
 
@@ -33,6 +34,7 @@ function SideBarNav({ user }) {
         { linkicon && <Link to={`/${user.data.id}/new-message/`} style={{ backgroundColor: '#fff', padding: '5px', borderRadius: '50%' }}><CreateIcon /></Link>} 
       </SideBarHeader>
       <ChannelList user={user}></ChannelList>
+    <DMList user={user}></DMList>
     </SideBarContainer>
   );
 }
