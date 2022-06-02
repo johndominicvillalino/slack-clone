@@ -6,18 +6,6 @@ import { connect } from 'react-redux'
 const Sendmessage = ({ receiver, user }) => {
 
     const [textValue, setTextValue] = useState('')
-    // const [userData, setUserData] = useState({})
-
-    // useEffect(() => {
-
-    //     if(Object.keys(user).length < 1) {
-    //         return
-    //     }
-
-    //     setUserData(user)
-
-
-    // },[user])
 
     const handleChange = e => {
         const { value } = e.target
@@ -30,9 +18,15 @@ const Sendmessage = ({ receiver, user }) => {
         e.preventDefault()
 
         let receiverProcessed = receiver
+        let receiver_class = 'User'
         if (receiver[0] === '#' || receiver[0] === '@') {
             receiverProcessed = receiverProcessed.substring(1)
         }
+
+        if (receiver[0] === '#') {
+            receiver_class = 'Channel'
+        }
+
 
         const { accessToken, client, expiry, uid } = user.headers
 
@@ -42,6 +36,7 @@ const Sendmessage = ({ receiver, user }) => {
             expiry,
             uid,
             message: textValue,
+            receiver_class,
             receiver_id: receiverProcessed
         }
 

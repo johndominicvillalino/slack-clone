@@ -10,6 +10,8 @@ import Register from './components/Register/Register'
 import {connect} from 'react-redux'
 import autoLogin from './components/actions/autoLogin'
 import { useHistory } from 'react-router-dom';
+import ChannelMessages from "./components/ChannelMessages/ChannelMessages";
+import CreateChannel from "./components/Channels/CreateChannel";
 
 
 function App({autoLogin}) {
@@ -62,6 +64,25 @@ function App({autoLogin}) {
             <NewMessage></NewMessage>
           </AppBody>
         </Route>
+
+
+        <Route path='/:id/channel/:id'>
+          <Header ></Header>
+          <AppBody>
+            <SideBarNav />
+            <ChannelMessages></ChannelMessages>
+          </AppBody>
+        </Route>
+
+        <Route path='/:id/create-channel'>
+          <Header ></Header>
+          <AppBody>
+            <SideBarNav />
+            <CreateChannel></CreateChannel>
+          </AppBody>
+        </Route>
+
+
 
       </Switch>
     </>

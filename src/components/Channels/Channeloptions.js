@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import './channel.css'
+import {Link} from 'react-router-dom'
 
-function Channeloptions({ setActive, setCreate }) {
-  function viewCreateChannel() {
-    setActive(false)
-    setCreate(true)
-  }
+function Channeloptions({id}) {
 
+  
   return (
     <div className="channelOptions">
-      <button onClick={viewCreateChannel}>Create a new channel</button>
-      <button>Browse all channels</button>
+      <Link to={`/${id}/create-channel`}>+</Link>
     </div>
   )
 }

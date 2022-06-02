@@ -4,6 +4,8 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CreateIcon from "@mui/icons-material/Create";
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import ChannelList from "../../Channels/ChannelList";
+
 
 
 function SideBarNav({ user }) {
@@ -30,6 +32,7 @@ function SideBarNav({ user }) {
         </SideBarInfo>
         { linkicon && <Link to={`/${user.data.id}/new-message/`} style={{ backgroundColor: '#fff', padding: '5px', borderRadius: '50%' }}><CreateIcon /></Link>} 
       </SideBarHeader>
+      <ChannelList user={user}></ChannelList>
     </SideBarContainer>
   );
 }
