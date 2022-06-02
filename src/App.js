@@ -12,6 +12,7 @@ import autoLogin from './components/actions/autoLogin'
 import { useHistory } from 'react-router-dom';
 import ChannelMessages from "./components/ChannelMessages/ChannelMessages";
 import CreateChannel from "./components/Channels/CreateChannel";
+import DirectMessages from "./components/DirectMessages/DirectMessages";
 
 
 function App({autoLogin}) {
@@ -82,6 +83,18 @@ function App({autoLogin}) {
           </AppBody>
         </Route>
 
+        <Route path='/:id/direct/:id'>
+          <Header ></Header>
+          <AppBody>
+            <SideBarNav />
+            <DirectMessages></DirectMessages>
+          </AppBody>
+        </Route>
+
+
+        <Route path='*'>
+            <Login></Login>
+        </Route>
 
 
       </Switch>
