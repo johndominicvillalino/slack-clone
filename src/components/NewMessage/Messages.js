@@ -55,10 +55,10 @@ const Messages = ({ user, receiver }) => {
             if (!messages.errors) {
                 if (messages.data.length > 0) {
                     setAllMessages(messages.data)
-                } else {
-                    setAllMessages([])
-                }
-            } 
+                } 
+            } else {
+                setAllMessages([])
+            }
 
         }
         const timeOut = setTimeout(getMessage, 500)
@@ -66,7 +66,7 @@ const Messages = ({ user, receiver }) => {
             clearTimeout(timeOut)
           
         }
-    }, [receiver,user])
+    }, [receiver])
 
     useEffect(() => {
 
@@ -74,7 +74,7 @@ const Messages = ({ user, receiver }) => {
         messageBody.current.scrollTop = height
         
 
-    })
+    },[allMessages])
 
 
     let messages = <div>No messages</div>

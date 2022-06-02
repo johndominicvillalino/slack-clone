@@ -1,9 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './channel.css'
 import createChannelMembers from '../request/createChannelMembers'
+import { connect } from 'react-redux'
 
-function CreateChannel({ setCreate }) {
+function CreateChannel({ user }) {
   const [channelInput, setChannelInput] = useState('')
+
+
+  useEffect(() => {
+
+    if (Object.keys(user).length < 1) {
+      return
+    }
+
+
+  }, [user])
 
   function handleChange(event) {
     const { value } = event.target
@@ -11,20 +22,25 @@ function CreateChannel({ setCreate }) {
   }
 
   function handleClick() {
-    setCreate(false)
 
     const fetch = async () => {
-      const fetched = await createChannelMembers({
-        accessToken: '7tREOoeLVJRq4XNO9IvkIQ',
-        client: 'BN6ANeIefNoE8NHXldToIw',
-        expiry: '1655277946',
-        uid: 'user@example.com',
-        channelName: channelInput,
-        user_ids: [580],
-      })
-      if (fetched.errors) {
-        alert(fetched.errors)
+
+      try {
+        const fetched = await createChannelMembers({
+          accessToken: user.header.accessToken,
+          client: user.header.client,
+          expiry: user.header.expiry,
+          uid: user.header.uid,
+          channelName: channelInput,
+          user_ids: [580], //make dynamic from the create UI
+        })
+
+        console.log(fetched)
+
+      } catch (err) {
+        console.error(err.message)
       }
+
     }
 
     fetch()
@@ -48,4 +64,10 @@ function CreateChannel({ setCreate }) {
   )
 }
 
-export default CreateChannel
+const MapToStateProps = state => ({
+
+  user: state.user
+
+})
+
+export default connect(MapToStateProps)(CreateChannel)
