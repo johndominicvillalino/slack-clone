@@ -67,7 +67,7 @@ const Login = ({ login,autoLoginFunc }) => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
 
 
@@ -75,7 +75,6 @@ const Login = ({ login,autoLoginFunc }) => {
 
 
       if (!loginNow.errors) {
-
         const user = JSON.stringify(loginNow)
         localStorage.setItem("currentUser", user);
         history.push(`/${loginNow.data.id}/client`)
@@ -89,7 +88,7 @@ const Login = ({ login,autoLoginFunc }) => {
     < >
       <div className='login-container'>
         <img src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg" alt="slack logo" height="42" /> <br /> <br />
-        <div className="sign-in-heading">Sign in to Slack</div> <br />
+        <div className="login-heading">Sign in to Slack</div> <br />
 
         <div className="header-sidelink-container">
           <div className="header-sidelink">No Account Yet?</div>
@@ -102,7 +101,7 @@ const Login = ({ login,autoLoginFunc }) => {
             value={loginDetails.email}
             onChange={handleChange}
             placeholder="name@work-email.com"
-            className='email-input'
+            className='email-input-login'
           /> <br /> <br />
 
           <input
@@ -110,11 +109,11 @@ const Login = ({ login,autoLoginFunc }) => {
             type="password"
             value={loginDetails.password}
             onChange={handleChange}
-            className="password-input"
+            className="password-input-login"
             placeholder='Slackpassword123'
           /> <br /> <br />
 
-          <button
+          <button   
             type='submit'
             onClick={handleSubmit}
             className="login-submit">Sign In with Email</button>

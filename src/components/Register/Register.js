@@ -97,8 +97,8 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
       <div className='register-container' >
 
         <img src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg" alt="slack logo" height="42" /> <br /> <br />
-        <div className="sign-in-heading">First, enter your email</div> <br />
-        <div className="sign-in-sub-heading">
+        <div className="register-heading">First, enter your email</div> <br />
+        <div className="register-sub-heading">
           We suggest using the <strong>email address you use at work.</strong>
         </div> <br />
         <div className="header-sidelink-container">
@@ -112,7 +112,7 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
             value={registerDetails.email}
             onChange={handleChange}
             placeholder="name@work-email.com"
-            className="email-input"
+            className="email-input-register"
           /> <br /> <br />
 
           <input
@@ -120,7 +120,7 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
             type="password"
             value={registerDetails.password}
             onChange={handleChange}
-            className="password-input"
+            className="password-input-register"
             placeholder='Slackpassword123'
           /> <br /> <br />
 
@@ -129,7 +129,7 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
             type="password"
             value={registerDetails.password_confirmation}
             onChange={handleChange}
-            className="password_confirmation-input"
+            className="password_confirmation-input-register"
             placeholder='Slackpassword123'
           /> <br /> <br />
 
