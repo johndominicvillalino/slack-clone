@@ -10,6 +10,15 @@
 
 .single-message {
     padding: 8px 10px;
-    border: 1px solid black;
+    font-size: 12px;
+    margin-bottom: 10px;
+
+    display:flex;
+    flex-direction: column;
     
+}
+
+.single-message :hover {
+    cursor: pointer;
+    background-color: rgb(190, 191, 192);
 }

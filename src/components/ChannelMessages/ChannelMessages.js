@@ -70,7 +70,7 @@ const ChannelMessages = ({ user, nameOfChannel }) => {
   let allmessages = <div>No messages</div>;
 
   if (messages.length > 0) {
-    allmessages = messages.map((e) => {
+    allmessages = messages.map((e, i) => {
       let month = new Date(e.created_at).getMonth() + 1;
       let year = new Date(e.created_at).getFullYear();
       let days = new Date(e.created_at).getDate();
@@ -90,13 +90,31 @@ const ChannelMessages = ({ user, nameOfChannel }) => {
       }
 
       return (
-        <div key={uuidv4()} className="single-message">
-          <div>
-            <div>{e.sender.id ? e.sender.id : ""}</div>
-            <div>{`${days}-${month}-${year} - ${hours}:${minutes} ${AMPM}`}</div>
+        <>
+          <div style={{ display: 'flex', marginLeft: '10px' }}>
+            {user.data.id === e.sender.id  && 
+              < Avatar
+                alt="Agnes Walker"
+                src="https://pbs.twimg.com/profile_images/808810422144999424/H_oVvM7h_400x400.jpg"
+              />
+            }
+            {user.data.id !== e.sender.id  &&
+              <Avatar
+                alt="Remy Sharp"
+                src="https://miro.medium.com/max/3150/1*8OkdLpw_7VokmSrzwXLnbg.jpeg"
+              />
+            }
+            <div key={uuidv4()} className="single-message">
+
+              <div style={{ display: 'flex', gap: '10px' }}>
+
+                <div>{e.sender.id === user.data.id ? 'Me': e.sender.id}</div>
+                <div style={{ color: '#777676', fontSize: '10px' }}>{`${days}-${month}-${year} - ${hours}:${minutes} ${AMPM}`}</div>
+              </div>
+              <div>{e.body}</div>
+            </div>
           </div>
-          <div>{e.body}</div>
-        </div>
+        </>
       );
     });
   }
