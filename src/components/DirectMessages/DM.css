@@ -1,5 +1,4 @@
 .DMContainer {
-
   padding: 0px 0px 0px 15px;
 }
 
@@ -15,7 +14,6 @@
   background-color: transparent;
   font-size: 1rem;
   font-weight: bold;
-
 }
 .messageList {
   margin-left: 25px;
@@ -34,5 +32,24 @@
 a:hover,
 p:hover {
   color: white;
+}
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

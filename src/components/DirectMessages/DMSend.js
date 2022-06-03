@@ -1,22 +1,24 @@
-
-import { useState } from 'react'
-import sendMessage from '../request/sendMessage'
-import { connect } from 'react-redux'
-import force from '../actions/force'
+import { useState } from "react";
+import sendMessage from "../request/sendMessage";
+import { connect } from "react-redux";
+import force from "../actions/force";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
+import Input from "@mui/material/Input";
 
 const DMSend = ({ id, user, force }) => {
-  const [textValue, setTextValue] = useState('')
+  const [textValue, setTextValue] = useState("");
+  const ariaLabel = { "aria-label": "description" };
 
   const handleChange = (e) => {
-    const { value } = e.target
-    setTextValue(value)
-  }
+    const { value } = e.target;
+    setTextValue(value);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const { accessToken, client, expiry, uid } = user.headers
-
+    const { accessToken, client, expiry, uid } = user.headers;
 
     const userInfo = {
       accessToken,
@@ -25,39 +27,44 @@ const DMSend = ({ id, user, force }) => {
       uid,
       message: textValue,
 
-      receiver_class: 'User',
+      receiver_class: "User",
       receiver_id: id,
-    }
+    };
 
     try {
-      const test = await sendMessage(userInfo)
+      const test = await sendMessage(userInfo);
 
-
-      await force()
+      await force();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
 
-
-    setTextValue('')
-  }
-
+    setTextValue("");
+  };
 
   return (
     <div className="send-form-container">
       <form className="form-container">
-        <textarea
+        <Input
           onChange={handleChange}
           value={textValue}
           className="textarea-send"
           row={1}
           placeholder="Jot something down"
-        ></textarea>
-        <button onClick={handleSubmit}>submit</button>
+          inputProps={ariaLabel}
+        />
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          endIcon={<SendIcon />}
+          color="success"
+          size="small"
+        >
+          Send
+        </Button>
       </form>
     </div>
+  );
+};
 
-  )
-}
-
-export default connect(null, { force })(DMSend)
+export default connect(null, { force })(DMSend);

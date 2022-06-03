@@ -1,57 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import styled from 'styled-components'
-import { Avatar } from '@mui/material'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import SearchIcon from '@mui/icons-material/Search'
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
-import Box from '@mui/material/Box'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import Divider from '@mui/material/Divider'
-import IconButton from '@mui/material/IconButton'
-import Tooltip from '@mui/material/Tooltip'
-import login from '../../request/login'
-import { useHistory } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import { Avatar } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import SearchIcon from "@mui/icons-material/Search";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import Box from "@mui/material/Box";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import login from "../../request/login";
+import { useHistory } from "react-router-dom";
 
 const Header = ({ user }) => {
-
-  let history = useHistory()
+  let history = useHistory();
   // {/* AVATAR */}
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [userDetails, setUserDetails] = useState({
-    email: '',
-    image: '',
-    id: '',
-    uid: '',
-  })
+    email: "",
+    image: "",
+    id: "",
+    uid: "",
+  });
 
-  const handleSignOut = e => {
+  const handleSignOut = (e) => {
     window.localStorage.clear();
-    history.push('/')
-  }
+    history.push("/");
+  };
 
   useEffect(() => {
     if (Object.keys(user).length < 1) {
-      return
+      return;
     }
 
-    const { id, email, image, uid } = user.data
+    const { id, email, image, uid } = user.data;
     setUserDetails(() => ({
       email: email,
       image: image,
       id: id,
       uid: uid,
-    }))
-  }, [user])
+    }));
+  }, [user]);
 
-  const open = Boolean(anchorEl)
+  const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
+
   // {/* AVATAR END */}
 
   return (
@@ -75,20 +75,20 @@ const Header = ({ user }) => {
       {/* AVATAR */}
       <React.Fragment>
         <Box
-          sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}
+          sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
         >
           <Tooltip title="Account settings">
             <IconButton
               onClick={handleClick}
               size="small"
               sx={{ ml: 2 }}
-              aria-controls={open ? 'account-menu' : undefined}
+              aria-controls={open ? "account-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
+              aria-expanded={open ? "true" : undefined}
             >
               <Avatar
                 src="https://pbs.twimg.com/profile_images/1523987597751726081/XuQeo7gC_400x400.jpg"
-                sx={{ width: 32, height: 32, margin: '0 10px 0 0' }}
+                sx={{ width: 32, height: 32, margin: "0 10px 0 0" }}
               ></Avatar>
             </IconButton>
           </Tooltip>
@@ -102,32 +102,32 @@ const Header = ({ user }) => {
           PaperProps={{
             elevation: 0,
             sx: {
-              overflow: 'visible',
-              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+              overflow: "visible",
+              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
               mt: 1.5,
               // padding: '0px 100px 0px 0px',
-              '& .MuiAvatar-root': {
+              "& .MuiAvatar-root": {
                 width: 32,
                 height: 32,
                 ml: -0.5,
                 mr: 1,
               },
-              '&:before': {
+              "&:before": {
                 content: '""',
-                display: 'block',
-                position: 'absolute',
+                display: "block",
+                position: "absolute",
                 top: 0,
                 right: 10,
                 width: 10,
                 height: 10,
-                bgcolor: 'background.paper',
-                transform: 'translateY(-50%) rotate(45deg)',
+                bgcolor: "background.paper",
+                transform: "translateY(-50%) rotate(45deg)",
                 zIndex: 0,
               },
             },
           }}
-          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          transformOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <MenuItem>
             <Avatar src="https://pbs.twimg.com/profile_images/1523987597751726081/XuQeo7gC_400x400.jpg" />
@@ -143,14 +143,14 @@ const Header = ({ user }) => {
       </React.Fragment>
       {/* AVATAR END */}
     </HeaderContainer>
-  )
-}
+  );
+};
 
 // export default Header
 const MapToStateProps = (state) => ({
   user: state.user,
-})
-export default connect(MapToStateProps)(Header)
+});
+export default connect(MapToStateProps)(Header);
 
 const HeaderSearch = styled.div`
   flex: 0.4;
@@ -169,7 +169,7 @@ const HeaderSearch = styled.div`
     outline: 0;
     color: white;
   }
-`
+`;
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -180,7 +180,7 @@ const HeaderContainer = styled.div`
   padding: 10px 0;
   background-color: var(--slack-color);
   color: white;
-`
+`;
 
 const HeaderLeft = styled.div`
   flex: 0.3;
@@ -193,7 +193,7 @@ const HeaderLeft = styled.div`
     margin-left: auto;
     margin-right: 30px;
   }
-`
+`;
 
 const HeaderRight = styled.div`
   flex: 0.3;
@@ -204,4 +204,4 @@ const HeaderRight = styled.div`
     margin-left: auto;
     margin-right: 20px;
   }
-`
+`;
