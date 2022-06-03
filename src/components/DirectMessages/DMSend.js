@@ -1,21 +1,22 @@
 
-import { useState } from "react";
-import sendMessage from "../request/sendMessage";
-import { connect } from "react-redux";
-import force from "../actions/force";
+import { useState } from 'react'
+import sendMessage from '../request/sendMessage'
+import { connect } from 'react-redux'
+import force from '../actions/force'
 
 const DMSend = ({ id, user, force }) => {
-  const [textValue, setTextValue] = useState("");
+  const [textValue, setTextValue] = useState('')
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    setTextValue(value);
-  };
+    const { value } = e.target
+    setTextValue(value)
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { accessToken, client, expiry, uid } = user.headers;
+    const { accessToken, client, expiry, uid } = user.headers
+
 
     const userInfo = {
       accessToken,
@@ -23,19 +24,24 @@ const DMSend = ({ id, user, force }) => {
       expiry,
       uid,
       message: textValue,
-      receiver_class: "User",
+
+      receiver_class: 'User',
       receiver_id: id,
-    };
+    }
 
     try {
-      const test = await sendMessage(userInfo);
+      const test = await sendMessage(userInfo)
 
-      await force();
+
+      await force()
     } catch (err) {
-      console.error(err.message);
-
+      console.error(err.message)
     }
-  };
+
+
+    setTextValue('')
+  }
+
 
   return (
     <div className="send-form-container">
@@ -50,9 +56,8 @@ const DMSend = ({ id, user, force }) => {
         <button onClick={handleSubmit}>submit</button>
       </form>
     </div>
-  );
-};
 
+  )
+}
 
-export default connect(null, { force })(DMSend);
-
+export default connect(null, { force })(DMSend)
