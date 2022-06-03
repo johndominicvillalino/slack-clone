@@ -6,9 +6,10 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import listofUsers from '../request/listofUsers'
 import autoLoginFunc from "../actions/autoLogin";
+import force from '../actions/force';
 
 
-const Login = ({ login,autoLoginFunc }) => {
+const Login = ({ login, autoLoginFunc, force }) => {
 
   useEffect(() => {
 
@@ -18,7 +19,7 @@ const Login = ({ login,autoLoginFunc }) => {
     if (!checkUser) {
       return
     }
-    
+
     const autoLogin = async () => {
 
       try {
@@ -31,14 +32,16 @@ const Login = ({ login,autoLoginFunc }) => {
         }
 
         const allUsers = await listofUsers(userInfo)
-  
-          if (!allUsers.errors) {
-        
-           await autoLoginFunc(checkUser)  
-            history.push(`/${checkUser.data.id}/client`)
-    
-          }
-        
+
+        if (!allUsers.errors) {
+
+          await autoLoginFunc(checkUser)
+          history.push(`/${checkUser.data.id}/client`)
+
+
+
+        }
+
       } catch (err) {
         console.error(err.message)
       }
@@ -48,6 +51,7 @@ const Login = ({ login,autoLoginFunc }) => {
     autoLogin()
   }, [])
 
+ 
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
@@ -127,4 +131,4 @@ const Login = ({ login,autoLoginFunc }) => {
 
 
 
-export default connect(null, { login,autoLoginFunc })(Login);
+export default connect(null, { login, autoLoginFunc, force })(Login);

@@ -1,8 +1,11 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import './To.css'
+import { useHistory } from 'react-router-dom'
 
 
-const To = ({setReceiver}) => {
+const To = ({setReceiver,id}) => {
+
+    let history = useHistory()
 
     const [senderInput,setSenderInput] = useState('')
 

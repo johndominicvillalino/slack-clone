@@ -6,8 +6,9 @@ import { connect } from "react-redux";
 import ChannelList from "../../Channels/ChannelList";
 import ChannelContainer from "../../Channels/ChannelContainer";
 import DMList from "../../DirectMessages/DMList";
+import force from "../../actions/force";
 
-function SideBarNav({ user }) {
+function SideBarNav({ user, force }) {
   const [linkicon, setLinkIcon] = useState(false);
 
   useEffect(() => {
@@ -17,6 +18,25 @@ function SideBarNav({ user }) {
 
     setLinkIcon(true);
   }, [user]);
+
+
+  useEffect(() => {
+    const forceUpdate = async () => {
+
+      try {
+        await force()
+
+      } catch (err) {
+        console.error(err.message)
+      }
+
+    }
+
+    const id = setInterval(forceUpdate, 1000)
+
+    return () => { clearInterval(id) }
+  })
+
 
   return (
     <SideBarContainer>
@@ -40,7 +60,7 @@ function SideBarNav({ user }) {
       <ChannelContainer>
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
-    
+
       <DMList user={user}></DMList>
     </SideBarContainer>
   );
@@ -50,7 +70,7 @@ const MapToStateProp = (state) => ({
   user: state.user,
 });
 
-export default connect(MapToStateProp)(SideBarNav);
+export default connect(MapToStateProp,{force})(SideBarNav);
 
 const SideBarContainer = styled.div`
   background-color: var(--slack-color);
