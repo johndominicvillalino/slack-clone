@@ -3,8 +3,10 @@ import './channel.css'
 import createChannelMembers from '../request/createChannelMembers'
 import { connect } from 'react-redux'
 import force from '../actions/force'
+import { useHistory } from 'react-router-dom'
 
-function CreateChannel({ user,force }) {
+function CreateChannel({ user, force }) {
+  let history = useHistory()
   const [channelInput, setChannelInput] = useState({
     name: '',
     id: '',
@@ -25,7 +27,6 @@ function CreateChannel({ user,force }) {
   }
 
   function handleClick() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'))
     const fetch = async () => {
       try {
         const fetched = await createChannelMembers({
@@ -45,23 +46,31 @@ function CreateChannel({ user,force }) {
         }
 
         await force()
-
       } catch (err) {
         console.error(err.message)
       }
     }
 
     fetch()
-
     setChannelInput(() => ({
       name: '',
       id: '',
     }))
+
+    history.push(`/${user.data.id}/client`)
+  }
+
+  function redirectToClient() {
+    history.push(`/${user.data.id}/client`)
   }
 
   return (
     <div className="createChannel">
       <div>
+        <button onClick={redirectToClient} className="close">
+          {' '}
+          X{' '}
+        </button>
         <h1>Create a channel</h1>
         <input
           onChange={handleChange}
@@ -87,4 +96,4 @@ const MapToStateProps = (state) => ({
   user: state.user,
 })
 
-export default connect(MapToStateProps,{force})(CreateChannel)
+export default connect(MapToStateProps, { force })(CreateChannel)
