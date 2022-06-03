@@ -1,22 +1,26 @@
-import { ConstructionOutlined } from '@mui/icons-material'
-import React, { useEffect, useState } from 'react'
-import './DM.css'
-import recentDMs from '../request/recentDMs'
-import { Link } from 'react-router-dom'
+
+import { ConstructionOutlined } from "@mui/icons-material";
+import React, { useEffect, useState } from "react";
+import "./DM.css";
+import recentDMs from "../request/recentDMs";
+import { Link } from "react-router-dom";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 //      <Link to={`/123/direct/321`} >DMM</Link>
 const DMList = ({ user }) => {
-  const [allDms, setAllDms] = useState([])
-  const [shortenDM, setShortenDM] = useState([])
-  const [isChange, setIsChange] = useState(false)
+  const [allDms, setAllDms] = useState([]);
+  const [shortenDM, setShortenDM] = useState([]);
+  const [isChange, setIsChange] = useState(false);
 
   useEffect(() => {
     if (Object.keys(user).length < 1) {
-      return
+      return;
     }
 
     const fetchData = async () => {
-      const { accessToken, client, expiry, uid } = user.headers
+      const { accessToken, client, expiry, uid } = user.headers;
+
 
       try {
         const fetch = await recentDMs({
@@ -24,29 +28,38 @@ const DMList = ({ user }) => {
           client,
           expiry,
           uid,
-        })
+
+        });
 
         if (fetch) {
-          setAllDms(fetch.data)
-          const shorten = fetch.data.slice(0, 3)
-          setShortenDM(shorten)
+          setAllDms(fetch.data);
+          const shorten = fetch.data.slice(0, 3);
+          setShortenDM(shorten);
         }
       } catch (err) {
-        console.error(err.message)
+        console.error(err.message);
       }
-    }
-    fetchData()
-  }, [user])
+    };
+    fetchData();
+  }, [user]);
 
   function changeState() {
-    isChange ? setIsChange(false) : setIsChange(true)
+    isChange ? setIsChange(false) : setIsChange(true);
+
   }
 
   return (
     <div>
       <div className="changeState">
-        <button onClick={changeState}> {!isChange ? '⮕' : '⬇'} </button>
-        <p> &nbsp;&nbsp;Direct Messages</p>
+
+        <button onClick={changeState}>
+          {" "}
+          {!isChange ? <ArrowRightIcon /> : <ArrowDropDownIcon />}{" "}
+        </button>
+        <a onClick={changeState}>
+          <p>Direct Messages</p>
+        </a>
+
       </div>
 
       <div className="messageList">
@@ -71,7 +84,9 @@ const DMList = ({ user }) => {
             ))}
       </div>
     </div>
-  )
-}
 
-export default DMList
+  );
+};
+
+export default DMList;
+

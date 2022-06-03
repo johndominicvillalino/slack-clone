@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import sendMessage from '../request/sendMessage'
 import { connect } from 'react-redux'
@@ -16,12 +17,14 @@ const DMSend = ({ id, user, force }) => {
 
     const { accessToken, client, expiry, uid } = user.headers
 
+
     const userInfo = {
       accessToken,
       client,
       expiry,
       uid,
       message: textValue,
+
       receiver_class: 'User',
       receiver_id: id,
     }
@@ -29,13 +32,16 @@ const DMSend = ({ id, user, force }) => {
     try {
       const test = await sendMessage(userInfo)
 
+
       await force()
     } catch (err) {
       console.error(err.message)
     }
 
+
     setTextValue('')
   }
+
 
   return (
     <div className="send-form-container">
@@ -50,6 +56,7 @@ const DMSend = ({ id, user, force }) => {
         <button onClick={handleSubmit}>submit</button>
       </form>
     </div>
+
   )
 }
 
