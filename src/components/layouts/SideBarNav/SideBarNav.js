@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import CreateIcon from '@mui/icons-material/Create'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import ChannelList from '../../Channels/ChannelList'
-import ChannelContainer from '../../Channels/ChannelContainer'
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import CreateIcon from "@mui/icons-material/Create";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import ChannelList from "../../Channels/ChannelList";
+import ChannelContainer from "../../Channels/ChannelContainer";
 import DMList from "../../DirectMessages/DMList";
 
-
 function SideBarNav({ user }) {
-  const [linkicon, setLinkIcon] = useState(false)
+  const [linkicon, setLinkIcon] = useState(false);
 
   useEffect(() => {
     if (Object.keys(user).length < 1) {
-      return
+      return;
     }
 
-    setLinkIcon(true)
-  }, [user])
+    setLinkIcon(true);
+  }, [user]);
 
   return (
     <SideBarContainer>
@@ -31,9 +28,9 @@ function SideBarNav({ user }) {
           <Link
             to={`/${user.data.id}/new-message/`}
             style={{
-              backgroundColor: '#fff',
-              padding: '5px',
-              borderRadius: '50%',
+              backgroundColor: "#fff",
+              padding: "5px",
+              borderRadius: "50%",
             }}
           >
             <CreateIcon />
@@ -44,16 +41,16 @@ function SideBarNav({ user }) {
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
       <ChannelList user={user}></ChannelList>
-    <DMList user={user}></DMList>
+      <DMList user={user}></DMList>
     </SideBarContainer>
-  )
+  );
 }
 
 const MapToStateProp = (state) => ({
   user: state.user,
-})
+});
 
-export default connect(MapToStateProp)(SideBarNav)
+export default connect(MapToStateProp)(SideBarNav);
 
 const SideBarContainer = styled.div`
   background-color: var(--slack-color);
@@ -63,7 +60,7 @@ const SideBarContainer = styled.div`
   min-width: 300px;
   max-width: 300px;
   margin-top: 60px;
-`
+`;
 
 const SideBarHeader = styled.div`
   display: flex;
@@ -77,8 +74,8 @@ const SideBarHeader = styled.div`
     background-color: white;
     border-radius: 999px;
   }
-`
+`;
 
 const SideBarInfo = styled.div`
   flex: 1;
-`
+`;
