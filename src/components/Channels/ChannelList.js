@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Channeloptions from './Channeloptions'
 import { connect } from 'react-redux'
 import { FeedTwoTone } from '@mui/icons-material'
+import getChannelDetailsViaID from '../request/getChannelDetailsViaID'
 
 function ChannelList({ user }) {
   const [channelList, setChannelList] = useState([])
@@ -35,18 +36,26 @@ function ChannelList({ user }) {
       try {
         const fetchChannels = await getAllUsersChannel(data)
 
+
         if (!fetchChannels.errors) {
           setChannelList(fetchChannels.data)
           const shorten = fetchChannels.data.slice(0, 3)
           setShortenChannel(shorten)
 
+  
+          
+
           setShowChannel(true)
         }
+
       } catch (err) {
         console.error(err.message)
       }
     }
     channels()
+
+
+
   }, [user])
 
   return (
@@ -60,6 +69,9 @@ function ChannelList({ user }) {
         {showChannel && isChange
           ? channelList.map((channel, index) => (
               <Link
+
+              nameOfChannel={channel.name}
+
                 to={`/${user.data.id}/channel/${channel.id}`}
                 className="channels"
                 key={index}

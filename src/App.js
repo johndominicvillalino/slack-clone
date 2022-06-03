@@ -50,7 +50,7 @@ function App({autoLogin}) {
           <Register />
         </Route>
 
-        <Route path='/:id/client'>
+        <Route path='/:id/client' exact>
           <Header ></Header>
           <AppBody>
             <SideBarNav />
@@ -58,7 +58,7 @@ function App({autoLogin}) {
         </Route>
 
 
-        <Route path='/:id/new-message/'>
+        <Route path='/:id/new-message/' exact>
           <Header ></Header>
           <AppBody>
             <SideBarNav />
@@ -67,7 +67,7 @@ function App({autoLogin}) {
         </Route>
 
 
-        <Route path='/:id/channel/:id'>
+        <Route path='/:id/channel/:id' exact>
           <Header ></Header>
           <AppBody>
             <SideBarNav />
@@ -75,7 +75,7 @@ function App({autoLogin}) {
           </AppBody>
         </Route>
 
-        <Route path='/:id/create-channel'>
+        <Route path='/:id/create-channel' exact>
           <Header ></Header>
           <AppBody>
             <SideBarNav />
@@ -83,7 +83,7 @@ function App({autoLogin}) {
           </AppBody>
         </Route>
 
-        <Route path='/:id/direct/:id'>
+        <Route path='/:id/direct/:id' exact>
           <Header ></Header>
           <AppBody>
             <SideBarNav />

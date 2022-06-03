@@ -52,7 +52,7 @@ const DMList = ({ user }) => {
 
 
     return (
-        <div className='channelList'>{allDms.map(e => <Link to={`/${user.data.id}/direct/${e.id}`}>{e.id}</Link>)}</div>
+        <div className='channelList'>{allDms.map((e,i) => <Link key={i} to={`/${user.data.id}/direct/${e.id}`}>{e.id}</Link>)}</div>
     )
 }
 

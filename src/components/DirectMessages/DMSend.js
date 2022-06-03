@@ -1,8 +1,10 @@
 import {useState} from 'react'
 import sendMessage from '../request/sendMessage'
+import {connect} from 'react-redux'
+import force from '../actions/force'
 
 
-const DMSend = ({channelId,user}) => {
+const DMSend = ({id,user,force}) => {
 
     const [textValue, setTextValue] = useState('')
 
@@ -10,9 +12,9 @@ const DMSend = ({channelId,user}) => {
         const { value } = e.target
         setTextValue(value)
     }
-   
 
-    const handleSubmit = async e => {
+    
+       const handleSubmit = async e => {
         e.preventDefault()
 
         const { accessToken, client, expiry, uid } = user.headers
@@ -23,18 +25,15 @@ const DMSend = ({channelId,user}) => {
             expiry,
             uid,
             message: textValue,
-            receiver_class:'Channel',
-            receiver_id:channelId
+            receiver_class:'User',
+            receiver_id:id
         }
-
-    console.log(userInfo)
 
         try {
 
-            const send = await sendMessage(userInfo)
-            if(send) {
-                console.log(send)
-            }
+             const test = await sendMessage(userInfo)
+            
+            await force()
 
         } catch (err) {
             console.error(err.message)
@@ -53,4 +52,4 @@ const DMSend = ({channelId,user}) => {
   )
 }
 
-export default DMSend
+export default connect(null,{force})(DMSend)
