@@ -5,10 +5,12 @@ import { connect } from 'react-redux'
 import retrieveMessage from '../request/retrieveMessage'
 import {v4 as uuidv4} from 'uuid'
 import SendMessageChannel from './SendMessageChannel'
+import getChannelDetails from '../request/getChannelDetailsViaID'
 
-const ChannelMessages = ({ user }) => {
+const ChannelMessages = ({ user, nameOfChannel }) => {
 
     const [messages, setMessages] = useState([])
+    const [channelName, setChannelName] = useState([])
 
     const messageBody = useRef()
 
@@ -39,6 +41,12 @@ const ChannelMessages = ({ user }) => {
                     receiver_id: id,
                 }
 
+                const channelInfo = await getChannelDetails({
+                    accessToken,client,expiry,uid,channelID:id
+                })
+
+               setChannelName(channelInfo.data.name)
+
                 const res = await retrieveMessage(userInfo)
     
                 setMessages(res.data)
@@ -51,6 +59,9 @@ const ChannelMessages = ({ user }) => {
 
         }
         getMessages()
+
+    
+
 
     }, [user,id])
 
@@ -104,7 +115,7 @@ const ChannelMessages = ({ user }) => {
     return (
         <div className='channel-message'>
             <div className='channel-name'>
-                <h2>{id}</h2>
+                <h2>{channelName}</h2>
             </div>
             <div className='channel-messages' ref={messageBody}>
                 {

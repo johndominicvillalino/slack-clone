@@ -14,6 +14,13 @@ const testReducer = createReducer({}, (builder) => {
              return loginInfo
           }
        })
+       .addCase('FORCE', (state, payload) => {
+
+         return {
+            ...state,
+            update:state.update + 1
+         }
+       })
   })
 
   export default testReducer;

@@ -40,7 +40,7 @@ function SideBarNav({ user }) {
       <ChannelContainer>
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
-      <ChannelList user={user}></ChannelList>
+    
       <DMList user={user}></DMList>
     </SideBarContainer>
   );

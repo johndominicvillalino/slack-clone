@@ -1,8 +1,10 @@
 import {useState} from 'react'
 import sendMessage from '../request/sendMessage'
+import force from '../actions/force'
+import {connect} from 'react-redux'
 
 
-const SendMessageChannel = ({channelId,user}) => {
+const SendMessageChannel = ({channelId,user,force}) => {
 
     const [textValue, setTextValue] = useState('')
 
@@ -10,8 +12,7 @@ const SendMessageChannel = ({channelId,user}) => {
         const { value } = e.target
         setTextValue(value)
     }
-
-    
+   
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -28,7 +29,7 @@ const SendMessageChannel = ({channelId,user}) => {
             receiver_id:channelId
         }
 
-    console.log(userInfo)
+        
 
         try {
 
@@ -36,6 +37,8 @@ const SendMessageChannel = ({channelId,user}) => {
             if(send) {
                 console.log(send)
             }
+
+            await force()
 
         } catch (err) {
             console.error(err.message)
@@ -54,4 +57,4 @@ const SendMessageChannel = ({channelId,user}) => {
   )
 }
 
-export default SendMessageChannel
+export default connect(null,{force})(SendMessageChannel)
