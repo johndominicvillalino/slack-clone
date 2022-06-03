@@ -7,6 +7,7 @@ import ChannelList from "../../Channels/ChannelList";
 import ChannelContainer from "../../Channels/ChannelContainer";
 import DMList from "../../DirectMessages/DMList";
 import force from "../../actions/force";
+import DMContainer from '../../DirectMessages/DMContainer'
 
 function SideBarNav({ user, force }) {
   const [linkicon, setLinkIcon] = useState(false);
