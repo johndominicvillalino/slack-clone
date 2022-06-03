@@ -8,6 +8,7 @@ import listofUsers from '../request/listofUsers'
 import autoLoginFunc from "../actions/autoLogin";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import force from '../actions/force';
 
 
 const Login = ({ login,autoLoginFunc }) => {
@@ -20,7 +21,7 @@ const [isError, setIsError] = useState(false);
     if (!checkUser) {
       return
     }
-    
+
     const autoLogin = async () => {
 
       try {
@@ -33,14 +34,16 @@ const [isError, setIsError] = useState(false);
         }
 
         const allUsers = await listofUsers(userInfo)
-  
-          if (!allUsers.errors) {
-        
-           await autoLoginFunc(checkUser)  
-            history.push(`/${checkUser.data.id}/client`)
-    
-          }
-        
+
+        if (!allUsers.errors) {
+
+          await autoLoginFunc(checkUser)
+          history.push(`/${checkUser.data.id}/client`)
+
+
+
+        }
+
       } catch (err) {
         console.error(err.message)
       }
@@ -50,6 +53,7 @@ const [isError, setIsError] = useState(false);
     autoLogin()
   }, [])
 
+ 
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
@@ -140,4 +144,4 @@ const [isError, setIsError] = useState(false);
 
 
 
-export default connect(null, { login,autoLoginFunc })(Login);
+export default connect(null, { login, autoLoginFunc, force })(Login);

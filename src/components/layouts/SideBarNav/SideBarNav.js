@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import CreateIcon from '@mui/icons-material/Create'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import ChannelList from '../../Channels/ChannelList'
-import ChannelContainer from '../../Channels/ChannelContainer'
-import DMList from '../../DirectMessages/DMList'
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import CreateIcon from "@mui/icons-material/Create";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import ChannelList from "../../Channels/ChannelList";
+import ChannelContainer from "../../Channels/ChannelContainer";
+import DMList from "../../DirectMessages/DMList";
+import force from "../../actions/force";
 import DMContainer from '../../DirectMessages/DMContainer'
 
-function SideBarNav({ user }) {
-  const [linkicon, setLinkIcon] = useState(false)
+function SideBarNav({ user, force }) {
+  const [linkicon, setLinkIcon] = useState(false);
 
   useEffect(() => {
     if (Object.keys(user).length < 1) {
@@ -18,6 +19,25 @@ function SideBarNav({ user }) {
 
     setLinkIcon(true)
   }, [user])
+
+
+  useEffect(() => {
+    const forceUpdate = async () => {
+
+      try {
+        await force()
+
+      } catch (err) {
+        console.error(err.message)
+      }
+
+    }
+
+    const id = setInterval(forceUpdate, 1000)
+
+    return () => { clearInterval(id) }
+  })
+
 
   return (
     <SideBarContainer>
@@ -42,6 +62,7 @@ function SideBarNav({ user }) {
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
 
+  
       <DMContainer>
         <DMList user={user}></DMList>
       </DMContainer>
@@ -53,7 +74,7 @@ const MapToStateProp = (state) => ({
   user: state.user,
 })
 
-export default connect(MapToStateProp)(SideBarNav)
+export default connect(MapToStateProp,{force})(SideBarNav);
 
 const SideBarContainer = styled.div`
   background-color: var(--slack-color);

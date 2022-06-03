@@ -2,7 +2,7 @@
 const force = () => async dispatch => {
 
     dispatch({
-        type:'FORCE',
+        type:'FORCE'
     })
 
 }
