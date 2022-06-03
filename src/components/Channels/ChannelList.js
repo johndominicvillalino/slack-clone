@@ -1,58 +1,85 @@
 import React, { useState, useEffect } from 'react'
 import getAllUsersChannel from '../request/getAllUsersChannel'
 import './channel.css'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Channeloptions from './Channeloptions'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import { FeedTwoTone } from '@mui/icons-material'
 
 function ChannelList({ user }) {
-
   const [channelList, setChannelList] = useState([])
+  const [shortenChannel, setShortenChannel] = useState([])
   const [showChannel, setShowChannel] = useState(false)
   const [id, setId] = useState(undefined)
+  const [isChange, setIsChange] = useState(false)
+
+  function changeState() {
+    isChange ? setIsChange(false) : setIsChange(true)
+  }
 
   useEffect(() => {
     const channels = async () => {
-
       if (Object.keys(user).length < 1) {
         return
       }
       setId(user.data.id)
-      
+
       const { accessToken, client, expiry, uid } = user.headers
       const data = {
         accessToken,
         client,
         expiry,
-        uid
+        uid,
       }
 
       try {
         const fetchChannels = await getAllUsersChannel(data)
+
         if (!fetchChannels.errors) {
           setChannelList(fetchChannels.data)
+          const shorten = fetchChannels.data.slice(0, 3)
+          setShortenChannel(shorten)
+
           setShowChannel(true)
         }
       } catch (err) {
         console.error(err.message)
       }
-
     }
     channels()
   }, [user])
 
   return (
-    <div className="channelList">
-      {showChannel && channelList.map((channel, index) => (
-        <Link  to={`/${user.data.id}/channel/${channel.id}`} className="channels" key={index}>
-          #&nbsp;&nbsp;{channel.name}
-        </Link>
-      ))}
-      {
-        !showChannel && <li>No Channels</li>
-      }
+    <>
+      <div className="channelHeader">
+        <button onClick={changeState}> {!isChange ? '⮕' : '⬇'} </button>
+        <p> &nbsp;&nbsp;Channels</p>
+      </div>
+
+      <div className="channelList">
+        {showChannel && isChange
+          ? channelList.map((channel, index) => (
+              <Link
+                to={`/${user.data.id}/channel/${channel.id}`}
+                className="channels"
+                key={index}
+              >
+                #&nbsp;&nbsp;{channel.name}
+              </Link>
+            ))
+          : shortenChannel.map((channel, index) => (
+              <Link
+                to={`/${user.data.id}/channel/${channel.id}`}
+                className="channels"
+                key={index}
+              >
+                #&nbsp;&nbsp;{channel.name}
+              </Link>
+            ))}
+        {!showChannel && <li>No Channels</li>}
+      </div>
       <Channeloptions id={id}></Channeloptions>
-    </div>
+    </>
   )
 }
 

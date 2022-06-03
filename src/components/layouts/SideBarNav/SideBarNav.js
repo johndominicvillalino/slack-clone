@@ -1,29 +1,25 @@
-import React, { useEffect,useState } from "react";
-import styled from "styled-components";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import CreateIcon from "@mui/icons-material/Create";
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import CreateIcon from '@mui/icons-material/Create'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import ChannelList from '../../Channels/ChannelList'
+import ChannelContainer from '../../Channels/ChannelContainer'
 import ChannelList from "../../Channels/ChannelList";
 import DMList from "../../DirectMessages/DMList";
 
 
-
 function SideBarNav({ user }) {
-
-
   const [linkicon, setLinkIcon] = useState(false)
 
   useEffect(() => {
-
-    if(Object.keys(user).length < 1) {
+    if (Object.keys(user).length < 1) {
       return
     }
 
     setLinkIcon(true)
-
-  },[user])
-
+  }, [user])
 
   return (
     <SideBarContainer>
@@ -31,19 +27,33 @@ function SideBarNav({ user }) {
         <SideBarInfo>
           <h2>Avion School</h2>
         </SideBarInfo>
-        { linkicon && <Link to={`/${user.data.id}/new-message/`} style={{ backgroundColor: '#fff', padding: '5px', borderRadius: '50%' }}><CreateIcon /></Link>} 
+        {linkicon && (
+          <Link
+            to={`/${user.data.id}/new-message/`}
+            style={{
+              backgroundColor: '#fff',
+              padding: '5px',
+              borderRadius: '50%',
+            }}
+          >
+            <CreateIcon />
+          </Link>
+        )}
       </SideBarHeader>
+      <ChannelContainer>
+        <ChannelList user={user}></ChannelList>
+      </ChannelContainer>
       <ChannelList user={user}></ChannelList>
     <DMList user={user}></DMList>
     </SideBarContainer>
-  );
+  )
 }
 
-const MapToStateProp = state => ({
-  user: state.user
+const MapToStateProp = (state) => ({
+  user: state.user,
 })
 
-export default connect(MapToStateProp)(SideBarNav);
+export default connect(MapToStateProp)(SideBarNav)
 
 const SideBarContainer = styled.div`
   background-color: var(--slack-color);
@@ -51,9 +61,9 @@ const SideBarContainer = styled.div`
   flex: 0.3;
   border-top: 1px solid #49274b;
   min-width: 300px;
-  max-width:300px;
+  max-width: 300px;
   margin-top: 60px;
-`;
+`
 
 const SideBarHeader = styled.div`
   display: flex;
@@ -67,8 +77,8 @@ const SideBarHeader = styled.div`
     background-color: white;
     border-radius: 999px;
   }
-`;
+`
 
 const SideBarInfo = styled.div`
   flex: 1;
-`;
+`

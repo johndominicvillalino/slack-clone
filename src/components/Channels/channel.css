@@ -1,52 +1,69 @@
-.channels ul {
-  list-style: none;
-}
-
 .channelContainer {
   padding: 10px 0px 0px 20px;
 }
 
 .channelList {
-  margin: 10px 0;
-  display:flex;
+  margin: 10px 0px 0px 20px;
+  display: flex;
   flex-direction: column;
-}
-
-.channelList li {
-  cursor: pointer;
 }
 
 .addChannel {
-  border: none;
-  color: #fff;
-  background-color: transparent;
-  margin-bottom: 5px;
-  cursor: pointer;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
 }
 
-.channelOptions {
-cursor: pointer;
-}
-
-.channelOptions button {
-  cursor: pointer;
+.addChannelText {
+  margin-left: 5px;
 }
 
 .createChannel {
-  padding: 20px;
   background-color: grey;
-  position: absolute;
   display: flex;
-  flex-direction: column;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  margin-top: 60px;
+  align-items: center;
+  justify-content: center;
 }
 
-.createChannel input {
-  margin: 5px 0;
+.createChannel > div {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  border: 1px solid #000;
+}
+
+.createChannel > div > input {
+  margin: 10px 0;
+  height: 40px;
 }
 
 .createChannel button {
   cursor: pointer;
+}
+
+.channels {
+  text-decoration: none;
+  color: #ffff;
+}
+
+.channelHeader > button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.channelHeader {
+  display: flex;
+  font-size: 1rem;
+  align-items: center;
+}
+
+.channelHeader p {
+  pointer-events: none;
 }
