@@ -70,7 +70,7 @@ const DirectMessages = ({ user }) => {
       }
 
       return (
-        <div style={{ display: 'flex', marginLeft: '10px' }}>
+        <div key={i} style={{ display: 'flex', marginLeft: '10px' }}>
            {user.data.id === e.sender.id   &&
             < Avatar
               alt="Agnes Walker"
@@ -83,7 +83,7 @@ const DirectMessages = ({ user }) => {
               src="https://miro.medium.com/max/3150/1*8OkdLpw_7VokmSrzwXLnbg.jpeg"
             />
           }
-          <div key={i} className="single-message">
+          <div  className="single-message">
             <div style={{ display: 'flex', gap: '10px' }}>
 
               <div>{e.sender.id === user.data.id ? 'Me': e.sender.id}</div>

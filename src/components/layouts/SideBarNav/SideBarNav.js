@@ -7,8 +7,9 @@ import ChannelList from "../../Channels/ChannelList";
 import ChannelContainer from "../../Channels/ChannelContainer";
 import DMList from "../../DirectMessages/DMList";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import force from "../../actions/force";
 
-function SideBarNav({ user }) {
+function SideBarNav({ user,force }) {
   const [linkicon, setLinkIcon] = useState(false);
 
   useEffect(() => {
@@ -18,6 +19,25 @@ function SideBarNav({ user }) {
 
     setLinkIcon(true);
   }, [user]);
+
+
+  useEffect(() => {
+    const forceUpdate = async () => {
+
+      try {
+        await force()
+
+      } catch (err) {
+        console.error(err.message)
+      }
+
+    }
+
+    const id = setInterval(forceUpdate, 1000)
+
+    return () => { clearInterval(id) }
+  })
+
 
   return (
     <SideBarContainer md={{ backgroundColor: "red" }}>
@@ -55,7 +75,7 @@ const MapToStateProp = (state) => ({
   user: state.user,
 });
 
-export default connect(MapToStateProp)(SideBarNav);
+export default connect(MapToStateProp,{force})(SideBarNav);
 
 const SideBarContainer = styled.div`
   background-color: var(--slack-color);
