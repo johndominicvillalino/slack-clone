@@ -6,18 +6,42 @@ import { connect } from "react-redux";
 import ChannelList from "../../Channels/ChannelList";
 import ChannelContainer from "../../Channels/ChannelContainer";
 import DMList from "../../DirectMessages/DMList";
+
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-function SideBarNav({ user }) {
+import force from "../../actions/force";
+import DMContainer from '../../DirectMessages/DMContainer'
+
+
+function SideBarNav({ user, force }) {
   const [linkicon, setLinkIcon] = useState(false);
 
   useEffect(() => {
     if (Object.keys(user).length < 1) {
-      return;
+      return
     }
 
-    setLinkIcon(true);
-  }, [user]);
+    setLinkIcon(true)
+  }, [user])
+
+
+  useEffect(() => {
+    const forceUpdate = async () => {
+
+      try {
+        await force()
+
+      } catch (err) {
+        console.error(err.message)
+      }
+
+    }
+
+    const id = setInterval(forceUpdate, 1000)
+
+    return () => { clearInterval(id) }
+  })
+
 
   return (
     <SideBarContainer>
@@ -32,9 +56,9 @@ function SideBarNav({ user }) {
           <Link
             to={`/${user.data.id}/new-message/`}
             style={{
-              backgroundColor: "#fff",
-              padding: "5px",
-              borderRadius: "50%",
+              backgroundColor: '#fff',
+              padding: '5px',
+              borderRadius: '50%',
             }}
           >
             <CreateIcon />
@@ -44,18 +68,20 @@ function SideBarNav({ user }) {
       <ChannelContainer>
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
+
       <hr />
 
       <DMList user={user}></DMList>
+
     </SideBarContainer>
-  );
+  )
 }
 
 const MapToStateProp = (state) => ({
   user: state.user,
-});
+})
 
-export default connect(MapToStateProp)(SideBarNav);
+export default connect(MapToStateProp,{force})(SideBarNav);
 
 const SideBarContainer = styled.div`
   background-color: var(--slack-color);
@@ -66,12 +92,14 @@ const SideBarContainer = styled.div`
   max-width: 300px;
   margin-top: 60px;
 
+
   > hr {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid #49274b;
   }
 `;
+
 
 const SideBarHeader = styled.div`
   display: flex;
@@ -85,8 +113,8 @@ const SideBarHeader = styled.div`
     background-color: white;
     border-radius: 999px;
   }
-`;
+`
 
 const SideBarInfo = styled.div`
   flex: 1;
-`;
+`

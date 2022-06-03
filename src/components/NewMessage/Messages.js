@@ -66,7 +66,7 @@ const Messages = ({ user, receiver }) => {
             clearTimeout(timeOut)
           
         }
-    }, [receiver])
+    }, [receiver,user])
 
     useEffect(() => {
 
@@ -77,7 +77,7 @@ const Messages = ({ user, receiver }) => {
     },[allMessages])
 
 
-    let messages = <div>No messages</div>
+    let messages = <div></div>
 
     if(allMessages.length > 0) {
         messages = allMessages.map(e => {
@@ -117,8 +117,8 @@ const Messages = ({ user, receiver }) => {
     return (
         <>
             <div className='message-container' ref={messageBody} style={{ScrollTop:500}}>
-                {isLoading && <div>Loading..</div>}
-                {!isLoading && messages} 
+      
+                {/* {!isLoading && messages}  */}
                 
                 </div>
         </>

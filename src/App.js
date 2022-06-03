@@ -44,39 +44,50 @@ function App({ autoLogin }) {
           <Register />
         </Route>
 
-        <Route path="/:id/client">
-          <Header></Header>
+
+        <Route path='/:id/client' exact>
+          <Header ></Header>
           <AppBody>
             <SideBarNav />
           </AppBody>
         </Route>
 
-        <Route path="/:id/new-message/">
-          <Header></Header>
+
+
+        <Route path='/:id/new-message/' exact>
+          <Header ></Header>
+
           <AppBody>
             <SideBarNav />
             <NewMessage></NewMessage>
           </AppBody>
         </Route>
 
-        <Route path="/:id/channel/:id">
-          <Header></Header>
+
+
+        <Route path='/:id/channel/:id' exact>
+          <Header ></Header>
+
           <AppBody>
             <SideBarNav />
             <ChannelMessages></ChannelMessages>
           </AppBody>
         </Route>
 
-        <Route path="/:id/create-channel">
-          <Header></Header>
+
+        <Route path='/:id/create-channel' exact>
+          <Header ></Header>
+
           <AppBody>
             <SideBarNav />
             <CreateChannel></CreateChannel>
           </AppBody>
         </Route>
 
-        <Route path="/:id/direct/:id">
-          <Header></Header>
+
+        <Route path='/:id/direct/:id' exact>
+          <Header ></Header>
+
           <AppBody>
             <SideBarNav />
             <DirectMessages></DirectMessages>

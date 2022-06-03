@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import sendMessage from "../request/sendMessage";
 import { connect } from "react-redux";
@@ -32,6 +33,7 @@ const DMSend = ({ id, user, force }) => {
       await force();
     } catch (err) {
       console.error(err.message);
+
     }
   };
 
@@ -51,4 +53,6 @@ const DMSend = ({ id, user, force }) => {
   );
 };
 
+
 export default connect(null, { force })(DMSend);
+

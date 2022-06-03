@@ -1,3 +1,4 @@
+
 import { ConstructionOutlined } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import "./DM.css";
@@ -20,12 +21,14 @@ const DMList = ({ user }) => {
     const fetchData = async () => {
       const { accessToken, client, expiry, uid } = user.headers;
 
+
       try {
         const fetch = await recentDMs({
           accessToken,
           client,
           expiry,
           uid,
+
         });
 
         if (fetch) {
@@ -42,11 +45,13 @@ const DMList = ({ user }) => {
 
   function changeState() {
     isChange ? setIsChange(false) : setIsChange(true);
+
   }
 
   return (
     <div>
       <div className="changeState">
+
         <button onClick={changeState}>
           {" "}
           {!isChange ? <ArrowRightIcon /> : <ArrowDropDownIcon />}{" "}
@@ -54,6 +59,7 @@ const DMList = ({ user }) => {
         <a onClick={changeState}>
           <p>Direct Messages</p>
         </a>
+
       </div>
 
       <div className="messageList">
@@ -78,7 +84,9 @@ const DMList = ({ user }) => {
             ))}
       </div>
     </div>
+
   );
 };
 
 export default DMList;
+

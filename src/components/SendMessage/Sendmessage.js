@@ -2,8 +2,11 @@ import './SendMessage.css'
 import { useState } from 'react'
 import sendMessage from '../request/sendMessage'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const Sendmessage = ({ receiver, user }) => {
+
+    let history = useHistory()
 
     const [textValue, setTextValue] = useState('')
 
@@ -12,7 +15,7 @@ const Sendmessage = ({ receiver, user }) => {
         setTextValue(value)
     }
 
-    
+
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -40,14 +43,18 @@ const Sendmessage = ({ receiver, user }) => {
             receiver_id: receiverProcessed
         }
 
-    console.log(userInfo)
-
         try {
 
-            const send = await sendMessage(userInfo)
-            if(send) {
-                console.log(send)
+            await sendMessage(userInfo)
+
+            if (receiver_class === 'User') {
+
+                history.push(`/${user.data.id}/direct/${receiverProcessed}`)
+            } else {
+                history.push(`/${user.data.id}/channel/${receiverProcessed}`)
             }
+
+
 
         } catch (err) {
             console.error(err.message)

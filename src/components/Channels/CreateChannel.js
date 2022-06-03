@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './channel.css'
 import createChannelMembers from '../request/createChannelMembers'
 import { connect } from 'react-redux'
+import force from '../actions/force'
+import { useHistory } from 'react-router-dom'
 
-function CreateChannel({ user }) {
+function CreateChannel({ user, force }) {
+  let history = useHistory()
   const [channelInput, setChannelInput] = useState({
     name: '',
     id: '',
@@ -24,40 +27,50 @@ function CreateChannel({ user }) {
   }
 
   function handleClick() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'))
     const fetch = async () => {
       try {
         const fetched = await createChannelMembers({
-          accessToken: currentUser.headers.accessToken,
-          client: currentUser.headers.client,
-          expiry: currentUser.headers.expiry,
-          uid: currentUser.headers.uid,
+          accessToken: user.headers.accessToken,
+          client: user.headers.client,
+          expiry: user.headers.expiry,
+          uid: user.headers.uid,
           channelName: channelInput.name,
           user_ids: [parseInt(channelInput.id)], //make dynamic from the create UI
         })
 
-        if (fetched.errors) {
-          alert(fetched.errors)
+        if (!fetched.errors) {
+          // alert(fetched.errors)
+          console.log(fetched)
         } else {
-          alert('success!')
+          console.log(fetched)
         }
-        console.log(fetched)
+
+        await force()
       } catch (err) {
-        console.log(err)
+        console.error(err.message)
       }
     }
 
     fetch()
-
     setChannelInput(() => ({
       name: '',
       id: '',
     }))
+
+    history.push(`/${user.data.id}/client`)
+  }
+
+  function redirectToClient() {
+    history.push(`/${user.data.id}/client`)
   }
 
   return (
     <div className="createChannel">
       <div>
+        <button onClick={redirectToClient} className="close">
+          {' '}
+          X{' '}
+        </button>
         <h1>Create a channel</h1>
         <input
           onChange={handleChange}
@@ -83,4 +96,4 @@ const MapToStateProps = (state) => ({
   user: state.user,
 })
 
-export default connect(MapToStateProps)(CreateChannel)
+export default connect(MapToStateProps, { force })(CreateChannel)

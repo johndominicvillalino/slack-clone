@@ -1,7 +1,12 @@
-const force = () => async (dispatch) => {
-  dispatch({
-    type: "FORCE",
-  });
-};
+
+
+const force = () => async dispatch => {
+
+    dispatch({
+        type:'FORCE'
+    })
+
+}
 
 export default force;
+

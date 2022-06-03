@@ -5,6 +5,7 @@ import retrieveMessage from "../request/retrieveMessage";
 import DMSend from "./DMSend";
 
 const DirectMessages = ({ user }) => {
+
   let messageBody = useRef();
 
   const [messages, setMessages] = useState([]);
@@ -64,18 +65,23 @@ const DirectMessages = ({ user }) => {
 
       if (minutes < 10) {
         minutes = `0${minutes}`;
+
       }
 
       return (
         <div key={i} className="single-message">
           <div>
+
             <div>{e.sender.id ? e.sender.id : ""}</div>
+
             <div>{`${days}-${month}-${year} - ${hours}:${minutes} ${AMPM}`}</div>
           </div>
           <div>{e.body}</div>
         </div>
+
       );
     });
+
   }
 
   return (
@@ -90,6 +96,7 @@ const DirectMessages = ({ user }) => {
         <DMSend user={user} id={id}></DMSend>
       </div>
     </div>
+
   );
 };
 
@@ -98,3 +105,4 @@ const MapToStateProps = (state) => ({
 });
 
 export default connect(MapToStateProps)(DirectMessages);
+

@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
-import getAllUsersChannel from "../request/getAllUsersChannel";
-import "./channel.css";
-import { Link } from "react-router-dom";
-import Channeloptions from "./Channeloptions";
-import { connect } from "react-redux";
-import { FeedTwoTone } from "@mui/icons-material";
+
+import React, { useState, useEffect } from 'react'
+import getAllUsersChannel from '../request/getAllUsersChannel'
+import './channel.css'
+import { Link } from 'react-router-dom'
+import Channeloptions from './Channeloptions'
+import { connect } from 'react-redux'
+import { FeedTwoTone } from '@mui/icons-material'
+import getChannelDetailsViaID from '../request/getChannelDetailsViaID'
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
 
 function ChannelList({ user }) {
   const [channelList, setChannelList] = useState([]);
@@ -37,19 +40,26 @@ function ChannelList({ user }) {
       try {
         const fetchChannels = await getAllUsersChannel(data);
 
+
         if (!fetchChannels.errors) {
           setChannelList(fetchChannels.data);
           const shorten = fetchChannels.data.slice(0, 3);
           setShortenChannel(shorten);
 
-          setShowChannel(true);
+          setShowChannel(true)
         }
+
       } catch (err) {
         console.error(err.message);
       }
-    };
-    channels();
-  }, [user]);
+
+    }
+    channels()
+
+
+
+  }, [user])
+
 
   return (
     <>
@@ -66,15 +76,16 @@ function ChannelList({ user }) {
       <div className="channelList">
         {showChannel && isChange
           ? channelList.map((channel, index) => (
-              <>
-                <Link
-                  to={`/${user.data.id}/channel/${channel.id}`}
-                  className="channels"
-                  key={index}
-                >
-                  #&nbsp;&nbsp;{channel.name}
-                </Link>
-              </>
+
+              <Link
+
+                to={`/${user.data.id}/channel/${channel.id}`}
+                className="channels"
+                key={index}
+              >
+                #&nbsp;&nbsp;{channel.name}
+              </Link>
+
             ))
           : shortenChannel.map((channel, index) => (
               <Link
