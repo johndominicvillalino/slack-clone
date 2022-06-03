@@ -8,18 +8,18 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.sign-in-heading {
+.login-heading {
     font-size: 48px;
     font-weight: 700;
     color: #1D1C1D;
 }
 
-.sign-in-sub-heading {
+.login-sub-heading {
     color: #454245;
 }
 
-.email-input,
-.password-input,
+.email-input-login,
+.password-input-login,
 .login-submit {
     height: 44px;
     width: 400px;
@@ -27,14 +27,14 @@
     font-size: 18px;
 }
 
-.email-input,
-.password-input {
+.email-input-login,
+.password-input-login {
     border: 1.5px solid rgb(120, 120, 120, 0.3);
     text-indent: 10px;
 }
 
-.email-input:focus,
-.password-input:focus {
+.email-input-login:focus,
+.password-input-login:focus {
     outline: none;
     border-color: #9ecaed;
     box-shadow: 0 0 20px #9ecaed;
@@ -75,4 +75,42 @@
     text-decoration: underline;
     text-decoration-color: #1264A3;
     cursor: pointer
+}
+
+.MuiPaper-root {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 502px) {
+    .email-input-login,
+    .password-input-login,
+    .login-submit,
+    .MuiPaper-root {
+        width: 350px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    img {
+        height: 35px;
+    }
+    .login-heading {
+        font-size: 35px;
+    }
+    .header-sidelink-container {
+        right: 15px;
+        top: 90vh;
+    }
+}
+
+@media (max-width: 350px) {
+    .email-input-login,
+    .password-input-login,
+    .login-submit,
+    .MuiPaper-root {
+        width: 270px;
+    }
 }

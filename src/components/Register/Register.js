@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 import autoLoginFunc from '../actions/autoLogin';
 import { useHistory } from 'react-router-dom';
 import listofUsers from '../request/listofUsers';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const Register = ({ registerFunc, autoLoginFunc }) => {
-
+  const [isError, setIsError] = useState(false);
   let history = useHistory()
-
 
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
         [name]: value
       }
     })
+    setIsError(false);
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,13 +85,17 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
   
         history.push(`/${registerNow.data.id}/client`)
 
+      } else {
+        setIsError(true);
       }
 
     } catch (error) {
-
     }
-
-
+    setRegisterDetails({
+      email:"",
+      password:"",
+      password_confirmation:"",
+    }) 
   }
 
   return (
@@ -97,8 +103,8 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
       <div className='register-container' >
 
         <img src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg" alt="slack logo" height="42" /> <br /> <br />
-        <div className="sign-in-heading">First, enter your email</div> <br />
-        <div className="sign-in-sub-heading">
+        <div className="register-heading">First, enter your email</div> <br />
+        <div className="register-sub-heading">
           We suggest using the <strong>email address you use at work.</strong>
         </div> <br />
         <div className="header-sidelink-container">
@@ -112,7 +118,7 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
             value={registerDetails.email}
             onChange={handleChange}
             placeholder="name@work-email.com"
-            className="email-input"
+            className="email-input-register"
           /> <br /> <br />
 
           <input
@@ -120,7 +126,7 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
             type="password"
             value={registerDetails.password}
             onChange={handleChange}
-            className="password-input"
+            className="password-input-register"
             placeholder='Slackpassword123'
           /> <br /> <br />
 
@@ -129,7 +135,7 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
             type="password"
             value={registerDetails.password_confirmation}
             onChange={handleChange}
-            className="password_confirmation-input"
+            className="password_confirmation-input-register"
             placeholder='Slackpassword123'
           /> <br /> <br />
 
@@ -138,6 +144,11 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
             onClick={handleSubmit}
             className="register-submit">Sign up</button>
         </form>
+        <div className="alert-container">
+    { isError && <Stack sx={{ width: '100%' }} spacing={2}> 
+      <Alert severity="error">Wrong credentials! Please try again!</Alert>
+      </Stack> }
+      </div> 
       </div>
     </>
 
