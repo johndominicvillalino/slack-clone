@@ -1,9 +1,11 @@
 .DMContainer {
-  padding: 10px 0px 0px 20px;
+
+  padding: 0px 0px 0px 15px;
 }
 
 .changeState {
-  margin-top: 10px;
+  margin-top: 5x;
+
   display: flex;
 }
 
@@ -13,11 +15,11 @@
   background-color: transparent;
   font-size: 1rem;
   font-weight: bold;
-  color: #fff;
-}
+
 
 .messageList {
-  margin: 10px 0px 0px 20px;
+  margin-left: 25px;
+
   display: flex;
   flex-direction: column;
 }
@@ -25,5 +27,12 @@
 .messages {
   text-decoration: none;
   list-style: none;
-  color: #fff;
+
+  color: #b39fb3;
+}
+
+a:hover,
+p:hover {
+  color: white;
+
 }
