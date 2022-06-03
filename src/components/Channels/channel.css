@@ -1,21 +1,21 @@
 .channelContainer {
-  padding: 10px 0px 0px 20px;
+  padding: 5px 0px 0px 5px;
 }
 
 .channelList {
-  margin: 10px 0px 0px 20px;
+  margin-left: 25px;
   display: flex;
   flex-direction: column;
 }
 
 .addChannel {
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   align-items: center;
 }
 
 .addChannelText {
-  margin-left: 5px;
+  margin-left: 4px;
 }
 
 .createChannel {
@@ -46,7 +46,7 @@
 
 .channels {
   text-decoration: none;
-  color: #ffff;
+  color: #b39fb3;
 }
 
 .channelHeader > button {
@@ -55,7 +55,7 @@
   background-color: transparent;
   font-size: 1rem;
   font-weight: bold;
-  color: #fff;
+  color: #b39fb3;
 }
 
 .channelHeader {
@@ -66,4 +66,20 @@
 
 .channelHeader p {
   pointer-events: none;
+}
+
+p {
+  color: #b39fb3;
+}
+
+a {
+  color: #b39fb3;
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+a:hover,
+p:hover {
+  color: white;
 }
