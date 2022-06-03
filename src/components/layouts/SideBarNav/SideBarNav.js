@@ -6,45 +6,21 @@ import { connect } from "react-redux";
 import ChannelList from "../../Channels/ChannelList";
 import ChannelContainer from "../../Channels/ChannelContainer";
 import DMList from "../../DirectMessages/DMList";
-
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import force from "../../actions/force";
-import DMContainer from '../../DirectMessages/DMContainer'
-
-
-function SideBarNav({ user, force }) {
+function SideBarNav({ user }) {
   const [linkicon, setLinkIcon] = useState(false);
 
   useEffect(() => {
     if (Object.keys(user).length < 1) {
-      return
+      return;
     }
 
-    setLinkIcon(true)
-  }, [user])
-
-
-  useEffect(() => {
-    const forceUpdate = async () => {
-
-      try {
-        await force()
-
-      } catch (err) {
-        console.error(err.message)
-      }
-
-    }
-
-    const id = setInterval(forceUpdate, 1000)
-
-    return () => { clearInterval(id) }
-  })
-
+    setLinkIcon(true);
+  }, [user]);
 
   return (
-    <SideBarContainer>
+    <SideBarContainer md={{ backgroundColor: "red" }}>
       <SideBarHeader>
         <SideBarInfo>
           <h2>
@@ -56,9 +32,9 @@ function SideBarNav({ user, force }) {
           <Link
             to={`/${user.data.id}/new-message/`}
             style={{
-              backgroundColor: '#fff',
-              padding: '5px',
-              borderRadius: '50%',
+              backgroundColor: "#fff",
+              padding: "5px",
+              borderRadius: "50%",
             }}
           >
             <CreateIcon />
@@ -68,20 +44,18 @@ function SideBarNav({ user, force }) {
       <ChannelContainer>
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
-
       <hr />
 
       <DMList user={user}></DMList>
-
     </SideBarContainer>
-  )
+  );
 }
 
 const MapToStateProp = (state) => ({
   user: state.user,
-})
+});
 
-export default connect(MapToStateProp,{force})(SideBarNav);
+export default connect(MapToStateProp)(SideBarNav);
 
 const SideBarContainer = styled.div`
   background-color: var(--slack-color);
@@ -91,7 +65,9 @@ const SideBarContainer = styled.div`
   min-width: 300px;
   max-width: 300px;
   margin-top: 60px;
-
+  @media (max-width: 769px) {
+    display: none;
+  }
 
   > hr {
     margin-top: 10px;
@@ -99,7 +75,6 @@ const SideBarContainer = styled.div`
     border: 1px solid #49274b;
   }
 `;
-
 
 const SideBarHeader = styled.div`
   display: flex;
@@ -113,8 +88,23 @@ const SideBarHeader = styled.div`
     background-color: white;
     border-radius: 999px;
   }
-`
+`;
 
 const SideBarInfo = styled.div`
   flex: 1;
-`
+`;
+
+const AppBar = styled(SideBarContainer)`
+  background-color: red;
+  ${(props) => props.theme.breakpoints.up("sm")} {
+    background-color: orange;
+  }
+  ${(props) => props.theme.breakpoints.up("md")} {
+    background-color: yellow;
+    color: black;
+  }
+  ${(props) => props.theme.breakpoints.up("lg")} {
+    background-color: green;
+    color: white;
+  }
+`;
