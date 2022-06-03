@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 import autoLoginFunc from '../actions/autoLogin';
 import { useHistory } from 'react-router-dom';
 import listofUsers from '../request/listofUsers';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const Register = ({ registerFunc, autoLoginFunc }) => {
-
+  const [isError, setIsError] = useState(false);
   let history = useHistory()
-
 
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
         [name]: value
       }
     })
+    setIsError(false);
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,13 +85,17 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
   
         history.push(`/${registerNow.data.id}/client`)
 
+      } else {
+        setIsError(true);
       }
 
     } catch (error) {
-
     }
-
-
+    setRegisterDetails({
+      email:"",
+      password:"",
+      password_confirmation:"",
+    }) 
   }
 
   return (
@@ -138,6 +144,11 @@ const Register = ({ registerFunc, autoLoginFunc }) => {
             onClick={handleSubmit}
             className="register-submit">Sign up</button>
         </form>
+        <div className="alert-container">
+    { isError && <Stack sx={{ width: '100%' }} spacing={2}> 
+      <Alert severity="error">Wrong credentials! Please try again!</Alert>
+      </Stack> }
+      </div> 
       </div>
     </>
 

@@ -77,10 +77,19 @@
     cursor: pointer
 }
 
+.MuiPaper-root {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
 @media (max-width: 502px) {
     .email-input-login,
     .password-input-login,
-    .login-submit {
+    .login-submit,
+    .MuiPaper-root {
         width: 350px;
         margin-top: 5px;
         margin-bottom: 5px;
@@ -100,7 +109,8 @@
 @media (max-width: 350px) {
     .email-input-login,
     .password-input-login,
-    .login-submit {
+    .login-submit,
+    .MuiPaper-root {
         width: 270px;
     }
 }

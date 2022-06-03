@@ -6,10 +6,12 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import listofUsers from '../request/listofUsers'
 import autoLoginFunc from "../actions/autoLogin";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 
 const Login = ({ login,autoLoginFunc }) => {
-
+const [isError, setIsError] = useState(false);
   useEffect(() => {
 
     let checkUser = window.localStorage.getItem('currentUser')
@@ -64,6 +66,7 @@ const Login = ({ login,autoLoginFunc }) => {
         [name]: value
       }
     })
+    setIsError(false);
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,11 +81,17 @@ const Login = ({ login,autoLoginFunc }) => {
         const user = JSON.stringify(loginNow)
         localStorage.setItem("currentUser", user);
         history.push(`/${loginNow.data.id}/client`)
-
+        
+      } else {
+        setIsError(true);
       }
     } catch (err) {
       console.error(err.message)
     }
+    setLoginDetails({
+      email:"",
+      password:"",
+    }) 
   }
   return (
     < >
@@ -118,6 +127,11 @@ const Login = ({ login,autoLoginFunc }) => {
             onClick={handleSubmit}
             className="login-submit">Sign In with Email</button>
         </form>
+        <div className="alert-container">
+    { isError && <Stack sx={{ width: '100%' }} spacing={2}> 
+      <Alert severity="error">Wrong credentials! Please try again!</Alert>
+      </Stack> }
+      </div> 
       </div>
     </>
 
