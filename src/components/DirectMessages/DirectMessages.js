@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import retrieveMessage from "../request/retrieveMessage";
 import DMSend from "./DMSend";
+import Avatar from "@mui/material/Avatar";
 
 const DirectMessages = ({ user }) => {
 
@@ -69,14 +70,28 @@ const DirectMessages = ({ user }) => {
       }
 
       return (
-        <div key={i} className="single-message">
-          <div>
+        <div style={{ display: 'flex', marginLeft: '10px' }}>
+           {user.data.id === e.sender.id   &&
+            < Avatar
+              alt="Agnes Walker"
+              src="https://pbs.twimg.com/profile_images/808810422144999424/H_oVvM7h_400x400.jpg"
+            />
+          }
+        {user.data.id !== e.sender.id  &&
+            <Avatar
+              alt="Remy Sharp"
+              src="https://miro.medium.com/max/3150/1*8OkdLpw_7VokmSrzwXLnbg.jpeg"
+            />
+          }
+          <div key={i} className="single-message">
+            <div style={{ display: 'flex', gap: '10px' }}>
 
-            <div>{e.sender.id ? e.sender.id : ""}</div>
+              <div>{e.sender.id === user.data.id ? 'Me': e.sender.id}</div>
 
-            <div>{`${days}-${month}-${year} - ${hours}:${minutes} ${AMPM}`}</div>
+              <div style={{ color: '#777676', fontSize: '10px' }}>{`${days}-${month}-${year} - ${hours}:${minutes} ${AMPM}`}</div>
+            </div>
+            <div>{e.body}</div>
           </div>
-          <div>{e.body}</div>
         </div>
 
       );
