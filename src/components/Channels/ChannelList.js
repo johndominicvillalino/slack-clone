@@ -70,8 +70,6 @@ function ChannelList({ user }) {
           ? channelList.map((channel, index) => (
               <Link
 
-              nameOfChannel={channel.name}
-
                 to={`/${user.data.id}/channel/${channel.id}`}
                 className="channels"
                 key={index}
