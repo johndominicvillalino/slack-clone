@@ -13,11 +13,11 @@ function SideBarNav({ user, force }) {
 
   useEffect(() => {
     if (Object.keys(user).length < 1) {
-      return;
+      return
     }
 
-    setLinkIcon(true);
-  }, [user]);
+    setLinkIcon(true)
+  }, [user])
 
 
   useEffect(() => {
@@ -48,9 +48,9 @@ function SideBarNav({ user, force }) {
           <Link
             to={`/${user.data.id}/new-message/`}
             style={{
-              backgroundColor: "#fff",
-              padding: "5px",
-              borderRadius: "50%",
+              backgroundColor: '#fff',
+              padding: '5px',
+              borderRadius: '50%',
             }}
           >
             <CreateIcon />
@@ -61,14 +61,17 @@ function SideBarNav({ user, force }) {
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
 
-      <DMList user={user}></DMList>
+  
+      <DMContainer>
+        <DMList user={user}></DMList>
+      </DMContainer>
     </SideBarContainer>
-  );
+  )
 }
 
 const MapToStateProp = (state) => ({
   user: state.user,
-});
+})
 
 export default connect(MapToStateProp,{force})(SideBarNav);
 
@@ -80,7 +83,7 @@ const SideBarContainer = styled.div`
   min-width: 300px;
   max-width: 300px;
   margin-top: 60px;
-`;
+`
 
 const SideBarHeader = styled.div`
   display: flex;
@@ -94,8 +97,8 @@ const SideBarHeader = styled.div`
     background-color: white;
     border-radius: 999px;
   }
-`;
+`
 
 const SideBarInfo = styled.div`
   flex: 1;
-`;
+`
