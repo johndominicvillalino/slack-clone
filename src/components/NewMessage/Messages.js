@@ -66,7 +66,7 @@ const Messages = ({ user, receiver }) => {
             clearTimeout(timeOut)
           
         }
-    }, [receiver])
+    }, [receiver,user])
 
     useEffect(() => {
 
