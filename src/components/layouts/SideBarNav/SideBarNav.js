@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CreateIcon from "@mui/icons-material/Create";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import SideBarOption from "./SideBarOption";
+import AddIcon from "@mui/icons-material/Add";
 
 function SideBarNav() {
   return (
@@ -10,9 +12,14 @@ function SideBarNav() {
         <SideBarInfo>
           <h2>Avion School</h2>
         </SideBarInfo>
-        <KeyboardArrowDownIcon />
         <CreateIcon />
       </SideBarHeader>
+
+      <SideBarOption Icon={ArrowRightIcon} title="Channels" />
+      <SideBarOption Icon={AddIcon} addChannelOption title="Add Channel" />
+      <hr />
+      <SideBarOption Icon={ArrowRightIcon} title="Direct Messages" />
+      <hr />
     </SideBarContainer>
   );
 }
@@ -26,6 +33,12 @@ const SideBarContainer = styled.div`
   border-top: 1px solid #49274b;
   max-width: 260px;
   margin-top: 60px;
+
+  > hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #49274b;
+  }
 `;
 
 const SideBarHeader = styled.div`
@@ -44,4 +57,10 @@ const SideBarHeader = styled.div`
 
 const SideBarInfo = styled.div`
   flex: 1;
+  > h3 {
+    display: flex;
+    font-size: 13px;
+    font-weight: 400;
+    align-items: center;
+  }
 `;
