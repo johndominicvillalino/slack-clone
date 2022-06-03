@@ -6,8 +6,12 @@ import { connect } from "react-redux";
 import ChannelList from "../../Channels/ChannelList";
 import ChannelContainer from "../../Channels/ChannelContainer";
 import DMList from "../../DirectMessages/DMList";
+
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import force from "../../actions/force";
 import DMContainer from '../../DirectMessages/DMContainer'
+
 
 function SideBarNav({ user, force }) {
   const [linkicon, setLinkIcon] = useState(false);
@@ -43,7 +47,10 @@ function SideBarNav({ user, force }) {
     <SideBarContainer>
       <SideBarHeader>
         <SideBarInfo>
-          <h2>Avion School</h2>
+          <h2>
+            Avion School
+            <KeyboardArrowDownIcon />
+          </h2>
         </SideBarInfo>
         {linkicon && (
           <Link
@@ -62,10 +69,10 @@ function SideBarNav({ user, force }) {
         <ChannelList user={user}></ChannelList>
       </ChannelContainer>
 
-  
-      <DMContainer>
-        <DMList user={user}></DMList>
-      </DMContainer>
+      <hr />
+
+      <DMList user={user}></DMList>
+
     </SideBarContainer>
   )
 }
@@ -84,7 +91,15 @@ const SideBarContainer = styled.div`
   min-width: 300px;
   max-width: 300px;
   margin-top: 60px;
-`
+
+
+  > hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #49274b;
+  }
+`;
+
 
 const SideBarHeader = styled.div`
   display: flex;

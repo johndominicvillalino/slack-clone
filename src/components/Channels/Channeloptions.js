@@ -1,31 +1,33 @@
-import React, { useState } from 'react'
-import './channel.css'
-import { Link } from 'react-router-dom'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
-import styled from 'styled-components'
+import React, { useState } from "react";
+import "./channel.css";
+import { Link } from "react-router-dom";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import styled from "styled-components";
 
 function Channeloptions({ id }) {
   return (
     <div className="addChannel">
       <Link to={`/${id}/create-channel`}>
         <Icon>
-          <AddCircleIcon />
+          <AddBoxIcon />
         </Icon>
       </Link>
-      <p className="addChannelText">Add channels</p>
+      <a href="/${id}/create-channel">
+        <p className="addChannelText">Add channels</p>
+      </a>
     </div>
-  )
+  );
 }
 
 const Icon = styled.div`
-  flex: 0.3;
+  flex: 0.5;
   display: flex;
   align-items: center;
 
   > .MuiSvgIcon-root {
     //Global ClassName in MUI
-    color: blue;
+    color: #b39fb3;
   }
-`
+`;
 
-export default Channeloptions
+export default Channeloptions;
